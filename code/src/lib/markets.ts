@@ -1,6 +1,9 @@
 /**
  * The markets we sell into, with the currency each one is *displayed* in.
- * Charge currency is resolved separately — MamoPay covers only some of these.
+ *
+ * Display currency and charge currency are separate concepts: MamoPay cannot
+ * charge in eight of these sixteen currencies. ADR-0003 settled how that gap is
+ * handled — Option A, MamoPay only, with a fallback charge currency.
  * See docs/decisions/ADR-0003-multi-currency-strategy.md.
  */
 export const MARKETS = [
@@ -23,21 +26,75 @@ export const MARKETS = [
 ] as const;
 
 export type Market = (typeof MARKETS)[number];
+export type CountryCode = Market["country"];
 
-/** Currencies MamoPay can actually charge in — verified against Mamo's docs. */
+/** Currencies MamoPay can charge in — verified against Mamo's published list. */
 export const MAMOPAY_CURRENCIES = new Set([
   "AED", "AUD", "CAD", "CHF", "CNY", "DKK", "DZD", "EGP", "EUR", "GBP",
   "HKD", "IDR", "INR", "NOK", "NZD", "PKR", "QAR", "RON", "SAR", "SEK",
   "SGD", "THB", "TRY", "USD",
 ]);
 
+/** Everything settles to a UAE account in AED (ADR-0003). */
+export const SETTLEMENT_CURRENCY = "AED";
+
+/**
+ * Where an unsupported market gets charged instead.
+ *
+ * GCC currencies are pegged to the dollar and locals are used to dollar
+ * pricing, so AED keeps the number stable and the FX cost low. Everyone else
+ * falls back to USD, which is universally understood.
+ */
+const FALLBACK_BY_COUNTRY: Partial<Record<CountryCode, string>> = {
+  OM: "AED",
+  KW: "AED",
+  BH: "AED",
+  JO: "AED",
+  IQ: "USD",
+  PS: "USD",
+  MA: "EUR",
+  JP: "USD",
+};
+
+const DEFAULT_FALLBACK = "USD";
+
 export function marketFor(country: string | null | undefined): Market | undefined {
   if (!country) return undefined;
   return MARKETS.find((m) => m.country === country);
 }
 
+export function isChargeable(currency: string) {
+  return MAMOPAY_CURRENCIES.has(currency);
+}
+
+export type ResolvedCurrency = {
+  /** What the price is shown in. */
+  display: string;
+  /** What the card is actually debited in. */
+  charge: string;
+  /** True when the two differ and the UI must say so before payment. */
+  differs: boolean;
+  country: CountryCode;
+};
+
+/**
+ * Resolve both currencies for a viewer. Server-side only — the client never
+ * chooses what it is charged in.
+ */
+export function resolveCurrency(
+  country: string | null | undefined,
+): ResolvedCurrency {
+  const market = marketFor(country) ?? MARKETS[0]; // UAE is the home market.
+  const display = market.currency;
+  const charge = isChargeable(display)
+    ? display
+    : (FALLBACK_BY_COUNTRY[market.country] ?? DEFAULT_FALLBACK);
+
+  return { display, charge, differs: display !== charge, country: market.country };
+}
+
 /** True when the viewer's display currency cannot be charged by MamoPay. */
 export function needsFallbackCurrency(country: string | null | undefined) {
   const market = marketFor(country);
-  return market ? !MAMOPAY_CURRENCIES.has(market.currency) : false;
+  return market ? !isChargeable(market.currency) : false;
 }

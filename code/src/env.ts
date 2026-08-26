@@ -23,6 +23,10 @@ const schema = z.object({
   /** Without a key, sign-in codes are printed to the server console in dev. */
   RESEND_API_KEY: z.string().optional(),
   EMAIL_FROM: z.string().default("Alzenins <noreply@alzenins.com>"),
+
+  /** Mamo Business API. Optional until Phase 2 wires up checkout. */
+  MAMOPAY_API_KEY: z.string().optional(),
+  MAMOPAY_ENV: z.enum(["sandbox", "production"]).default("sandbox"),
 });
 
 function load() {
@@ -35,6 +39,8 @@ function load() {
     AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    MAMOPAY_API_KEY: process.env.MAMOPAY_API_KEY,
+    MAMOPAY_ENV: process.env.MAMOPAY_ENV,
   });
 
   if (!parsed.success) {
@@ -52,3 +58,8 @@ export const env = load();
 export const hasGoogleAuth = Boolean(
   env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET,
 );
+
+export const MAMOPAY_BASE_URL =
+  env.MAMOPAY_ENV === "production"
+    ? "https://business.mamopay.com/manage_api/v1"
+    : "https://sandbox.dev.business.mamopay.com/manage_api/v1";

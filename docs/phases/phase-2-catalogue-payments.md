@@ -3,7 +3,10 @@
 **Goal:** money moves. A student in any target country sees a price in a sensible currency,
 pays through MamoPay, and we record a paid order — reliably, idempotently, in both locales.
 
-**Estimate:** 3–4 weeks · **Depends on:** Phase 1 · **Status:** `Not started`
+**Estimate:** 3–4 weeks · **Depends on:** Phase 1 · **Status:** `Unblocked, not started`
+
+> Unblocked 2026-08-27: ADR-0003 accepted (Option A, MamoPay only), sandbox API key
+> issued, VAT treatment set provisionally by ADR-0007, store scoped digital-only.
 
 This is the highest-risk phase. Budget for it accordingly.
 
@@ -19,7 +22,9 @@ This is the highest-risk phase. Budget for it accordingly.
 ### Multi-currency (see [ADR-0003](../decisions/ADR-0003-multi-currency-strategy.md))
 - Price books: an authored `price` row per currency, never runtime FX conversion
 - Country → display currency map for all 16 target countries
-- Charge-currency resolution: display currency → provider support check → fallback
+- Charge-currency resolution — **already built** in `code/src/lib/markets.ts`
+  (`resolveCurrency()`), with the fallback map from ADR-0003 and a test asserting no market
+  can resolve to a currency MamoPay cannot process
 - `CurrencySwitcher` with country auto-detect and manual override, persisted per user
 - Explicit UI when display currency ≠ charge currency ("You'll be charged 402 AED")
 - Admin tooling to bulk-review price books and flag gaps
@@ -40,13 +45,18 @@ This is the highest-risk phase. Budget for it accordingly.
 
 ## Out of scope
 
-Subscriptions (Phase 4). Seat allocation (Phase 3). Shipping (Phase 7).
-The Stripe adapter unless ADR-0003 chose it — if so, it is in scope here.
+Subscriptions (Phase 4). Seat allocation (Phase 3). The digital store catalogue (Phase 7).
+
+The **Stripe adapter** is out of scope entirely: ADR-0003 chose Option A, so v1 ships one
+payment provider. Shipping and non-UAE tax are out of scope permanently — the store is
+digital-only and UAE VAT is the only treatment applied (ADR-0007).
 
 ## Acceptance criteria
 
 - [ ] An admin creates a product with prices in AED, SAR, QAR, EGP, USD, EUR, and it appears live
-- [ ] A visitor from Saudi Arabia sees SAR by default; from Japan, sees the ADR-0003 outcome
+- [ ] A visitor from Saudi Arabia sees SAR and is charged SAR
+- [ ] A visitor from Japan sees JPY and is told, before paying, that USD will be charged
+- [ ] A visitor from Kuwait sees KWD and is charged AED
 - [ ] A sandbox purchase completes and produces exactly one `paid` order
 - [ ] Replaying the same webhook 10× still produces exactly one paid order and one receipt
 - [ ] A webhook arriving *before* the browser returns from checkout is handled correctly
@@ -60,10 +70,10 @@ The Stripe adapter unless ADR-0003 chose it — if so, it is in scope here.
 
 | Risk | Mitigation |
 | --- | --- |
-| MamoPay API surface differs from the docs | Spike against sandbox in week 1, before building on assumptions |
-| Currency coverage gap blocks target markets | ADR-0003 decided in Phase 0, not discovered here |
+| MamoPay API surface differs from the docs | Spike against the sandbox in week 1, before building on assumptions. The key is already issued, so this can start immediately. |
+| Currency coverage gap blocks target markets | Settled by ADR-0003 and already implemented and tested |
 | Webhook ordering and duplicates | Event table + idempotency keys designed in, not bolted on |
-| VAT treatment wrong | Settled in Phase 0 with the accountant |
+| VAT treatment wrong | ADR-0007 applies UAE 5% inclusive **provisionally**. Rate and treatment are stored per order and configurable, so a correction is a settings change plus a backfill — not a migration. The accountant's written determination is a Phase 9 sign-off item. |
 
 ## Sign-off checklist
 

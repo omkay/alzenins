@@ -2,8 +2,8 @@
 
 | Field | Value |
 | --- | --- |
-| Status | **Proposed — blocks Phase 2. Needs an owner decision in Phase 0.** |
-| Date | 2026-08-26 |
+| Status | **Accepted** |
+| Date | 2026-08-26 · accepted 2026-08-27 |
 | Deciders | Owner, engineering |
 
 ## Context
@@ -66,14 +66,26 @@ and reconciliation pain when the charged amount differs from the displayed one.
 
 ## Decision
 
-**Pending owner sign-off in Phase 0.** Engineering recommendation:
+**Option A.** MamoPay only, with an explicit fallback charge currency for the eight
+markets it cannot process. No Stripe in v1.
 
-> **Start with Option A, build for Option B.** Ship Phase 2 with the MamoPay adapter only
-> and explicit fallback-currency messaging. Because the `PaymentProvider` port exists from
-> day one, adding Stripe later is an adapter plus a webhook route — not a refactor. Revisit
-> once Japan and Kuwait revenue justifies the second processor's operational overhead.
+The `PaymentProvider` port is still built from day one, so Option B remains a later
+adapter plus a webhook route rather than a refactor. Revisit once Japan and Kuwait
+revenue justifies a second processor's operational overhead.
 
-Regardless of A or B, the following are **decided**:
+### Fallback map
+
+| Market | Display | Charged in | Why |
+| --- | --- | --- | --- |
+| Oman, Kuwait, Bahrain, Jordan | OMR / KWD / BHD / JOD | **AED** | Dollar-pegged; AED keeps the number stable and the FX cost low |
+| Iraq, Palestine | IQD / ILS | **USD** | No peg; USD is the widely understood alternative |
+| Morocco | MAD | **EUR** | Closest major trading currency |
+| Japan | JPY | **USD** | Neither JPY nor a regional alternative is available |
+
+Implemented in `code/src/lib/markets.ts` as `resolveCurrency()`, with a test asserting
+that **no market can resolve to a charge currency MamoPay cannot process**.
+
+The following are also decided:
 
 1. **Authored price books.** A `price` row per `(product, currency, interval)`, set by hand
    with psychologically sensible rounding. No runtime FX conversion, ever.

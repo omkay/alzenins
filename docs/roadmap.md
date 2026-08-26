@@ -18,12 +18,12 @@ Estimates assume a small team (1–2 engineers + design input). They are ranges,
 | **4** | Subscriptions & Entitlements | Recurring billing, access control, dunning, self-serve billing | 2–3 weeks |
 | **5** | 1:1 Booking with Natives | Availability, slots, credits, booking, cancellation policy | 2–3 weeks |
 | **6** | Recorded Courses (LMS) | Video, materials, progress, drip, gated access | 3 weeks |
-| **7** | Store & Inventory | Catalogue ops, stock, discounts, shipping, fulfilment | 2–3 weeks |
+| **7** | Store (digital) | Digital catalogue, entitlement delivery, discounts | 1–2 weeks |
 | **8** | Admin & Operations | Full dashboard, reporting, audit, teacher tooling | 2–3 weeks |
 | **9** | Hardening & Launch | Security, performance, a11y, load test, migration, cutover | 2 weeks |
 | **10** | Post-launch | Growth, analytics-driven iteration, v2 candidates | ongoing |
 
-**Total to launch: roughly 5–7 months.**
+**Total to launch: roughly 5–7 months.** (Phase 7 shrank to 1–2 weeks once the store was scoped digital-only.)
 
 > **A faster path exists.** If you want revenue sooner, Phases 1 → 2 → 3 → 4 is a
 > **coherent, shippable product on its own** (~3–4 months): accounts, paid cohort seats in
@@ -44,7 +44,7 @@ Each phase has its own file with the full task list, acceptance criteria, and si
 - [Phase 4 — Subscriptions & Entitlements](phases/phase-4-subscriptions.md)
 - [Phase 5 — 1:1 Booking](phases/phase-5-booking.md)
 - [Phase 6 — Recorded Courses](phases/phase-6-lms.md)
-- [Phase 7 — Store](phases/phase-7-store.md)
+- [Phase 7 — Store (digital)](phases/phase-7-store.md)
 - [Phase 8 — Admin & Operations](phases/phase-8-admin.md)
 - [Phase 9 — Hardening & Launch](phases/phase-9-launch.md)
 
@@ -91,30 +91,26 @@ name where they land, and move on. What's forbidden is silent slippage.
 
 ---
 
-## Open questions blocking Phase 1
+## Open questions
 
-These need answers from the owner before foundation work commits us:
+**Answered 2026-08-27:**
 
-1. **Existing codebase.** Do we evolve the current `alzenins.com` repo in place, or start a
-   fresh app and port the marketing pages? (Recommendation: fresh app, port the pages — the
-   marketing site is small and the platform's structure is very different.)
+| # | Question | Answer |
+| --- | --- | --- |
+| 4 | Currency fallback strategy | **Option A** — MamoPay only, fallback charge currency for the 8 uncovered markets. → [ADR-0003](decisions/ADR-0003-multi-currency-strategy.md) |
+| 3 | MamoPay account | Sandbox API key issued and stored in the local environment. Phase 2 unblocked. |
+| 6 | VAT | UAE standard 5%, tax-inclusive, **provisional** pending the accountant. → [ADR-0007](decisions/ADR-0007-vat-treatment.md) |
+| 8 | Store: physical or digital | **Digital only.** No shipping, stock, or returns — Phase 7 roughly halves. |
+| 1 | Existing codebase | Fresh app, marketing pages rebuilt. Done in Phase 1. |
+
+**Still open:**
+
 2. **Which languages beyond Japanese?** "Language training website" implies more. Does the
    data model need to be multi-language from day one, or is Japanese-only fine for v1 with
    a `language` column reserved? (Recommendation: reserve the column, ship Japanese-only.)
-3. **MamoPay account status.** Is the business account verified, and is API/sandbox access
-   already enabled? This gates all of Phase 2.
-4. **Stripe as fallback** — see [ADR-0003](decisions/ADR-0003-multi-currency-strategy.md).
-   MamoPay does **not** support JPY, KWD, BHD, OMR, JOD, IQD, MAD, or ILS. Japan, Kuwait,
-   Bahrain, Oman, Jordan, Iraq, Morocco, and Palestine are on your target list. Options:
-   (a) add Stripe for those, (b) charge those markets in USD/AED. Both are viable; this is a
-   commercial call, not a technical one.
 5. **Zoom account tier.** Server-to-Server OAuth apps need a paid Zoom plan. Confirmed?
-6. **VAT.** UAE VAT registration status, and whether educational services are exempt in your
-   case. This changes the price model (tax-inclusive vs tax-added) and is painful to retrofit.
 7. **Existing student migration.** How many active students, and where does their data live
    now (spreadsheet? WhatsApp? nothing)? Determines the Phase 9 migration effort.
-8. **Store inventory.** Are products physical (shipping, stock, customs) or digital only?
-   Physical goods across 15 countries is a materially larger Phase 7.
 9. **Teacher payouts.** Are instructors salaried, or do they need per-session payout
    tracking? Payouts are out of v1 scope unless you say otherwise.
 10. **Brand assets.** Do we have the logo in vector, and a font licence for Cairo and

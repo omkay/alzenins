@@ -1,70 +1,76 @@
-# Phase 7 — Store
+# Phase 7 — Store (digital only)
 
-**Goal:** a real curated shop — catalogue, stock, variants, discounts, shipping across the
-target countries, and order fulfilment an admin can actually run.
+**Goal:** a curated shop for digital goods — material packs, worksheet bundles, audio,
+flashcard decks — bought once and delivered instantly through the entitlement engine.
 
-**Estimate:** 2–3 weeks · **Depends on:** Phase 2 · **Status:** `Not started`
+**Estimate:** 1–2 weeks · **Depends on:** Phases 2 and 4 · **Status:** `Not started`
 
-Scope depends heavily on the Phase 0 answer to "physical or digital?". Physical goods
-shipping to 16 countries is the larger half of this phase.
+> **Scope decision, 2026-08-27: digital only.** No physical goods. That removes shipping
+> zones and rates, carrier integration, customs, stock levels, oversell protection, packing
+> slips, returns and address collection — roughly half the original phase. If physical goods
+> are ever added, that is a new phase, not an extension of this one.
 
 ## In scope
 
 ### Catalogue
-- `store_item` / `variant` on top of the shared `product` / `price` tables
-- Variants (size, colour, language edition) with per-variant SKU, stock, and price delta
-- Product media gallery, rich bilingual descriptions, categories and tags
-- Related products and "students also bought" (simple co-purchase query, not ML)
-- Full admin CRUD: create, edit, duplicate, archive, bulk price update, CSV import/export
+- `store_item` on top of the shared `product` / `price` tables, always `is_digital = true`
+- Bilingual titles, descriptions, media gallery, categories and tags
+- Level tagging (N5–N1) so items can be surfaced from the matching course
+- Full admin CRUD: create, edit, duplicate, archive, bulk price update
+- Bundles: several digital items sold as one product at a combined price
 
-### Inventory
-- `stock_movement` append-only ledger; on-hand and reserved tracked separately
-- Reservation on order creation, released on expiry or cancellation, committed on fulfilment
-- Low-stock threshold with admin alerts; back-order and pre-order flags
-- Oversell protection with the same transactional lock pattern as seats
+### Delivery — this is the whole mechanism
+- A purchase grants an **entitlement**, exactly like a recorded course
+  ([ADR-0004](../decisions/ADR-0004-entitlements-as-access-authority.md)). There is no
+  separate "download" concept to build.
+- Files live in R2; every download is a **short-lived signed URL** generated per request
+  after an entitlement check ([ADR-0006](../decisions/ADR-0006-video-hosting-and-gated-access.md))
+- Per-user download counters, to spot a shared link being hammered
+- PDFs watermarked with the buyer's email — traceable, not DRM
+- A permanent "My materials" library: everything the student has ever bought or been granted
 
 ### Cart & checkout
-- Persistent cart (server-side for signed-in users, cookie for guests), mixed line types —
-  a cohort seat and a textbook in one order is a legitimate basket
-- Guest checkout with account creation offered post-purchase
-- Address collection only when the basket requires shipping
-- Shipping zones mapped to the same country list as pricing, rate tables per currency
-- Tax/VAT applied per the Phase 0 determination
+- Persistent cart, mixed line types — a cohort seat and a worksheet pack in one basket
+- Guest checkout, with account creation offered after purchase
+- **No address collection, ever.** A digital basket never asks where you live.
+- VAT per [ADR-0007](../decisions/ADR-0007-vat-treatment.md): UAE 5%, tax-inclusive
 
-### Discounts (full)
-- Percent, fixed, free-shipping, and buy-X-get-Y
+### Discounts
+- Percent and fixed, per-currency fixed amounts
 - Targeting by product, category, first order, or customer segment
+- Auto-applied promotions: active subscribers get a standing discount on materials —
+  an entitlement check, not a coupon code
 - Stacking rules, minimum order, redemption caps, per-customer limits
-- Auto-applied promotions alongside code entry
 
-### Fulfilment
-- Order pipeline: paid → processing → packed → shipped → delivered, with per-state notifications
-- Tracking number capture and a customer-facing order status page
-- Returns and partial refunds with correct stock and entitlement handling
-- Packing slips and a daily orders export
+### Refunds
+- Admin-issued refunds revoke the entitlement, which immediately stops new signed URLs
+- Refund window policy stated on the product page and enforced in code
 
 ## Out of scope
 
-Multi-warehouse. Dropship integrations. Marketplace sellers. Subscription boxes.
+Physical goods in any form. Multi-warehouse, dropship, marketplace sellers, subscription
+boxes. Print-on-demand.
 
 ## Acceptance criteria
 
-- [ ] An admin creates a product with three variants and different stock per variant
-- [ ] Buying the last unit of a variant marks it sold out; two simultaneous buyers → one succeeds
-- [ ] A cart with a course seat and two books checks out as one payment and fulfils both correctly
-- [ ] Shipping to Saudi Arabia and to Japan each quote the right rate in the right currency
-- [ ] A discount code respects its cap and refuses a stacked second code per the rules
-- [ ] Cancelling an unpaid order releases reserved stock within the expiry window
-- [ ] A partial refund returns the right stock and leaves the rest of the order intact
-- [ ] Digital-only baskets never ask for a shipping address
+- [ ] An admin creates a digital product with a PDF and an audio file, and it appears live
+- [ ] A purchase grants access within seconds and the file downloads
+- [ ] A signed download URL copied and reused an hour later is rejected
+- [ ] Revoking the entitlement stops new download URLs being issued — verified by direct
+      API call, not just a hidden button
+- [ ] A cart with a course seat and two digital items checks out as one payment and fulfils both
+- [ ] A digital-only basket never asks for a shipping address
+- [ ] An active subscriber sees the standing materials discount applied automatically
+- [ ] A refund revokes access and the download stops working
+- [ ] Downloaded PDFs carry the buyer's email as a watermark
 - [ ] The full store flow works in Arabic RTL on a phone
 
 ## Sign-off checklist
 
 - [ ] All acceptance criteria demonstrated on staging
-- [ ] Real catalogue loaded with actual products and photography
-- [ ] Shipping rates verified against real carrier quotes for at least 5 countries
-- [ ] Runbook: cancel and refund an order, fix stock drift, handle a return
+- [ ] Real catalogue loaded with actual materials from the instructors
+- [ ] Refund policy published and matching what the code does
+- [ ] Runbook: replace a file, re-grant access, handle a refund
 
 ## Sign-off
 

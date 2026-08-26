@@ -34,16 +34,25 @@ Designed alongside the six, at the owner's request.
 
 | # | Screen | The hard problem it must solve |
 | --- | --- | --- |
-| 7 | **Store listing** | Category filtering, stock states (low / sold out) legible at a glance, cart drawer with a shipping-threshold nudge, physical vs digital distinguishable in the grid |
-| 8 | **Product detail** | Variant selection with an unavailable option shown rather than hidden, live stock, shipping quote for the viewer's country, cross-sell to the course bundle |
+| 7 | **Store listing** | ~~Stock states, shipping-threshold nudge~~ → **rework for digital**: instant-delivery badging, file type and size, level tags, bundles |
+| 8 | **Product detail** | ~~Variants, live stock, shipping quote~~ → **rework for digital**: what's inside the pack, sample preview, subscriber discount, cross-sell to the course |
 
 **The catalogue in these mockups is placeholder.** The live `/products` page is a "coming
 soon" notice — there is no real catalogue to design from. Products, prices, and copy here
 are plausible stock for a Japanese school and must be replaced.
 
-Both screens deliberately show a **digital** product beside physical ones (`تحميل فوري`,
-no shipping) because [open question 8](../roadmap.md#open-questions-blocking-phase-1) —
-physical or digital — is still unanswered and roughly doubles the size of Phase 7.
+> ### ⚠ These two artboards are now out of scope, 2026-08-27
+>
+> The store was scoped **digital only**. The published mockups still show physical goods —
+> a Genki textbook, calligraphy pens, stock counters ("بقي 3", "نفدت الكمية"), a shipping
+> quote to Riyadh, a free-shipping threshold and a 14-day physical return. **None of that
+> exists any more.**
+>
+> What a digital store screen needs instead: instant-delivery badging on every item, file
+> type and size, page or track counts, level tags, bundles, a "my materials" library, and a
+> checkout with no address step at all. No stock, no variants, no shipping.
+>
+> Both artboards need reworking before Phase 7 design begins. The other six are unaffected.
 
 ## After the eight
 

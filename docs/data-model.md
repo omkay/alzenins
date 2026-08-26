@@ -40,8 +40,8 @@ erDiagram
   LESSON ||--o{ ASSET : has
   LESSON ||--o{ PROGRESS : "tracked by"
 
-  STORE_ITEM ||--o{ VARIANT : has
-  VARIANT ||--o{ STOCK_MOVEMENT : moves
+  STORE_ITEM ||--o{ STORE_ASSET : delivers
+  ENTITLEMENT ||--o{ DOWNLOAD_EVENT : "gates"
 ```
 
 ## 2. Core tables
@@ -120,11 +120,19 @@ ledger, never a mutable counter.
 ### Commerce
 
 **`order`** — `id`, `user_id`, `status` (`draft`|`pending_payment`|`paid`|`failed`|
-`refunded`|`cancelled`), `currency`, `subtotal_minor`, `discount_minor`, `shipping_minor`,
-`tax_minor`, `total_minor`, `discount_code`, `country`, `idempotency_key` (unique),
-`provider`, `provider_ref`, `placed_at`.
+`refunded`|`cancelled`), `display_currency`, `charge_currency`, `subtotal_minor`,
+`discount_minor`, `tax_minor`, `tax_rate`, `tax_treatment` (`inclusive`|`exclusive`),
+`total_minor`, `discount_code`, `country`, `idempotency_key` (unique), `provider`,
+`provider_ref`, `settled_amount_minor`, `settled_currency`, `placed_at`.
 
-**`order_item`** — `id`, `order_id`, `product_id`, `price_id`, `variant_id`, `quantity`,
+> **`display_currency` and `charge_currency` are separate columns**, per
+> [ADR-0003](decisions/ADR-0003-multi-currency-strategy.md). For eight of the sixteen
+> markets they differ, and reporting needs both. `tax_rate` and `tax_treatment` are stored
+> per order rather than derived at report time, so historical orders stay correct after a
+> rate change ([ADR-0007](decisions/ADR-0007-vat-treatment.md)). No `shipping_minor` — the
+> store is digital only.
+
+**`order_item`** — `id`, `order_id`, `product_id`, `price_id`, `quantity`,
 `unit_amount_minor`, `total_minor`, `fulfilment_state`, `fulfilment_payload` (jsonb —
 e.g. the cohort to enrol into).
 
@@ -137,8 +145,8 @@ e.g. the cohort to enrol into).
 `current_period_start`, `current_period_end`, `cancel_at_period_end`, `dunning_attempts`,
 `grace_until`, `cohort_id` (if it grants a seat).
 
-**`entitlement`** — `id`, `user_id`, `scope` (`cohort`|`recorded_course`|`store_discount`|
-`feature`), `resource_id`, `valid_from`, `valid_until` (nullable = perpetual), `source`
+**`entitlement`** — `id`, `user_id`, `scope` (`cohort`|`recorded_course`|`store_item`|
+`store_discount`|`feature`), `resource_id`, `valid_from`, `valid_until` (nullable = perpetual), `source`
 (`subscription`|`order`|`manual`), `source_id`, `revoked_at`.
 
 > **Invariant:** *all* access checks read `entitlement`. No feature queries `subscription`
@@ -163,22 +171,25 @@ e.g. the cohort to enrol into).
 
 **`progress`** — `user_id`, `lesson_id`, `seconds_watched`, `completed_at`, `last_seen_at`.
 
-### Store
+### Store (digital only — decided 2026-08-27)
 
-**`store_item`** — `product_id` (PK/FK), `is_digital`, `weight_grams`, `requires_shipping`.
+**`store_item`** — `product_id` (PK/FK), `level`, `file_count`, `total_bytes`.
+No `weight_grams`, no `requires_shipping`: the store sells digital goods only.
 
-**`variant`** — `id`, `store_item_id`, `sku` (unique), `option_name`, `option_value`,
-`stock_on_hand`, `stock_reserved`, `price_delta_minor`.
+**`store_asset`** — `id`, `store_item_id`, `kind` (`pdf`|`audio`|`archive`), `provider`
+(`r2`), `provider_ref`, `filename`, `size_bytes`, `locale`, `position`.
 
-**`stock_movement`** — `id`, `variant_id`, `delta`, `reason` (`purchase`|`restock`|
-`reservation`|`release`|`adjustment`), `order_id`, `created_at`. Append-only, same shape
-as the credit ledger.
+> There is **no `variant`, `stock_movement`, `shipping_zone` or `shipping_rate` table.**
+> Digital goods have no stock to oversell and nowhere to ship. A purchase grants an
+> `entitlement` with scope `store_item`, and downloads are short-lived signed URLs issued
+> per request after an entitlement check — the same mechanism as recorded courses.
+
+**`download_event`** — `id`, `user_id`, `store_asset_id`, `entitlement_id`, `ip`,
+`created_at`. Not for analytics — for spotting one signed link being hammered.
 
 **`discount_code`** — `id`, `code` (unique), `kind` (`percent`|`fixed`), `value`,
 `currency` (for fixed), `applies_to` (jsonb), `max_redemptions`, `redemptions`,
 `starts_at`, `ends_at`, `min_order_minor`.
-
-**`shipping_zone`** / **`shipping_rate`** — countries[] → rate table per currency.
 
 ### Ops
 
@@ -198,3 +209,5 @@ as the credit ledger.
 6. Credit balance can never go negative.
 7. A price is never resolved from a client-supplied value.
 8. An expired entitlement blocks video playback token issuance, not just the UI link.
+9. No market ever resolves to a charge currency MamoPay cannot process (already tested).
+10. An order's stored `tax_rate` is unaffected by a later change to the configured rate.

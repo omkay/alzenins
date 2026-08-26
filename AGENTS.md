@@ -21,10 +21,10 @@ We are turning it into a **full language-training platform**:
 | Booking with natives | Credit-based 1:1 booking against native-speaker availability |
 | Calendar | Availability, scheduling, reschedules, reminders, ICS/Google sync |
 | Auth & profiles | Accounts, roles (student/teacher/admin), profile & learning history |
-| Store | Curated product catalogue, inventory, discounts, order management |
+| Store | Curated **digital** catalogue, discounts, order management. No physical goods |
 | Product admin | Full CRUD on courses/products/prices from the dashboard |
-| Multi-currency | GCC + Levant + North Africa + Japan/EU/US pricing |
-| Payments | MamoPay primary, with a provider abstraction for uncovered currencies |
+| Multi-currency | GCC + Levant + North Africa + Japan/EU/US. Display and charge currency are separate — MamoPay covers only 8 of 16 (ADR-0003) |
+| Payments | MamoPay only in v1 behind a `PaymentProvider` port; uncovered markets get a fallback charge currency (ADR-0003 Option A) |
 | Recorded courses | Video + downloadable materials gated by subscription or one-off purchase |
 
 Full detail: [`docs/product-brief.md`](docs/product-brief.md).
@@ -102,9 +102,9 @@ Record what you learned in the journal so the next agent doesn't repeat the look
 | Field | Value |
 | --- | --- |
 | Active phase | **Phase 1 — Foundation** (in progress) |
-| Phase 0 | Not signed off. Started Phase 1 anyway by owner's decision — Phase 1 depends on none of the open questions. They still gate Phase 2 onward. |
-| Repo state | `code/` holds a running Next.js 16 app: brand design system, ar/en RTL routing, Drizzle + Postgres identity schema, seed. Auth not built yet. |
-| Blocking decisions | See open questions in [`docs/roadmap.md`](docs/roadmap.md#open-questions-blocking-phase-1) |
+| Phase 0 | Partially answered 2026-08-27 — currency fallback (ADR-0003 Option A), MamoPay sandbox key, VAT (ADR-0007), digital-only store. **Phase 2 is unblocked.** Six questions remain, gating Phases 3, 7 and 9. |
+| Repo state | `code/` holds a running Next.js 16 app: brand design system, ar/en RTL routing, Auth.js with email OTP and role guards, rate limiting, profiles, five marketing pages, Drizzle + Postgres, seed, CI. |
+| Blocking decisions | See [open questions](docs/roadmap.md#open-questions) — six still open, none blocking Phase 2 |
 
 Update this table whenever the active phase changes.
 

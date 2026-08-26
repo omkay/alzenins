@@ -40,6 +40,7 @@ A platform that owns the full student lifecycle: discover → buy → learn → 
 - Native mobile apps (responsive web + PWA only).
 - Automated placement testing with AI grading.
 - Physical classroom / in-person location management.
+- **Physical goods of any kind** — no shipping, stock, customs or returns.
 - Multi-tenant white-label for other schools.
 
 These may become v2. They are not v1.
@@ -51,7 +52,7 @@ Four revenue lines the platform must support cleanly:
 1. **Cohort subscriptions** — recurring monthly seat in a live class group (the core today).
 2. **Prepaid course terms** — one-off purchase of a 6/12-month programme at a discount.
 3. **1:1 credits** — packs of native-speaker sessions, bookable against availability.
-4. **Store** — curated physical/digital products (books, stationery, merch, material packs).
+4. **Store** — curated **digital** products only: material packs, worksheet bundles, audio, flashcard decks. No physical goods (decided 2026-08-27).
 
 Plus **recorded courses**, sold either as a one-off unlock or bundled into a subscription tier.
 

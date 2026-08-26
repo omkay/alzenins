@@ -3,7 +3,28 @@
 **Goal:** lock every decision that is expensive to reverse, and open every account that
 has a lead time, so Phase 1 never blocks on an answer.
 
-**Estimate:** 1 week · **Status:** `Not started`
+**Estimate:** 1 week · **Status:** `Partially answered`
+
+> Four of the ten questions were answered on 2026-08-27 — enough to unblock Phase 2.
+> The rest still gate Phases 3, 7 and 9. Phase 0 is **not** signed off.
+
+| Answered | Outcome |
+| --- | --- |
+| Currency fallback | Option A — MamoPay only ([ADR-0003](../decisions/ADR-0003-multi-currency-strategy.md)) |
+| MamoPay access | Sandbox key issued |
+| VAT | UAE 5% inclusive, provisional ([ADR-0007](../decisions/ADR-0007-vat-treatment.md)) |
+| Store scope | Digital only |
+| Codebase | Fresh app (settled in Phase 1) |
+
+| Still needed | Gates |
+| --- | --- |
+| Languages beyond Japanese | Data model |
+| Zoom paid tier | Phase 3 |
+| Student migration | Phase 9 |
+| Teacher payouts | Confirm out of scope |
+| Brand assets (vector logo) | Phase 1 polish |
+| Price sheet per currency | Phase 2 |
+| Legal pages | Phase 9 |
 
 ## In scope
 
@@ -22,12 +43,12 @@ Any application code. Resist it.
 
 ## Tasks
 
-- [ ] Owner answers the ten open questions; each answer captured in an ADR or the journal
+- [x] ~~Owner answers the ten open questions~~ — **four answered**, six outstanding
 - [ ] Write the product & price sheet: every SKU × every currency × every interval
-- [ ] Confirm MamoPay account verification and sandbox API key
-- [ ] Decide Stripe-fallback vs USD-fallback for uncovered currencies → close ADR-0003
+- [x] Confirm MamoPay account verification and sandbox API key
+- [x] Decide Stripe-fallback vs USD-fallback for uncovered currencies → ADR-0003 **Accepted**
 - [ ] Confirm Zoom plan supports Server-to-Server OAuth
-- [ ] Get a VAT determination in writing from the accountant
+- [ ] Get a VAT determination in writing from the accountant — **provisional default applied, still required before launch**
 - [ ] Inventory current students and where their records live
 - [ ] Approve the design canvas for the 6 hero screens
 - [ ] Collect brand assets: vector logo, photography, sakura motifs, instructor portraits
