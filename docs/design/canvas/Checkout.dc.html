@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #faf7f1; }
+    a { color: #a96f2d; } a:hover { color: #1b2a4a; }
+    * { box-sizing: border-box; }
+  </style>
+</helmet>
+
+<div style="direction: rtl; font-family: 'Cairo', 'Segoe UI', sans-serif; background: #faf7f1; color: #1b2a4a; width: 390px; min-height: 844px; position: relative; overflow: hidden; display: flex; flex-direction: column;">
+
+  <div style="position: absolute; inset-inline-end: -120px; top: -120px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle, rgba(216,162,93,0.30), rgba(216,162,93,0)); filter: blur(80px); pointer-events: none;"></div>
+
+  <!-- header -->
+  <div style="position: relative; display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-bottom: 1px solid #d9d0c2;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+    <div style="font-size: 16px; font-weight: 800; flex-grow: 1;">إتمام الطلب</div>
+    <div style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; color: #2f6f5a;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2f6f5a" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+      دفع آمن
+    </div>
+  </div>
+
+  <div style="position: relative; flex-grow: 1; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+
+    <!-- items -->
+    <div style="padding: 18px; border-radius: 18px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 16px 34px rgba(200,150,90,0.10);">
+      <div style="font-size: 13px; font-weight: 700; color: #52627f; margin-bottom: 15px;">طلبك</div>
+
+      <div style="display: flex; gap: 13px; padding-bottom: 15px; border-bottom: 1px solid #ece5da;">
+        <div style="width: 48px; height: 48px; border-radius: 13px; background: linear-gradient(140deg, #1b2a4a, #34527f); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.8"><rect x="2" y="6" width="13" height="12" rx="2.5"/><path d="M15 10.5l6-3.2v9.4l-6-3.2z"/></svg>
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-size: 14px; font-weight: 700; line-height: 1.45;">دبلوم اليابانية — المجموعة أ</div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 4px;">اشتراك شهري · يبدأ 1 سبتمبر</div>
+        </div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; font-weight: 700; white-space: nowrap;">399</div>
+      </div>
+
+      <div style="display: flex; gap: 13px; padding-top: 15px;">
+        <div style="width: 48px; height: 48px; border-radius: 13px; background: linear-gradient(140deg, #e2b274, #d8a25d); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.8"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M4 19h15"/></svg>
+        </div>
+        <div style="flex-grow: 1;">
+          <div style="font-size: 14px; font-weight: 700; line-height: 1.45;">كتاب Genki I — الطبعة الثالثة</div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 4px;">شحن إلى الرياض · 3–5 أيام</div>
+        </div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; font-weight: 700; white-space: nowrap;">185</div>
+      </div>
+    </div>
+
+    <!-- totals -->
+    <div style="padding: 18px; border-radius: 18px; background: #fffdf9; border: 1px solid #d9d0c2;">
+      <div style="display: flex; flex-direction: column; gap: 11px; font-size: 13.5px;">
+        <div style="display: flex; justify-content: space-between;"><span style="color: #52627f;">المجموع الفرعي</span><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;">584.00</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="color: #52627f;">الشحن</span><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600;">35.00</span></div>
+        <div style="display: flex; justify-content: space-between; color: #2f6f5a;"><span style="font-weight: 700;">خصم NIHONGO20</span><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;">−80.00</span></div>
+      </div>
+      <div style="height: 1px; background: #ece5da; margin: 15px 0;"></div>
+      <div style="display: flex; align-items: baseline; justify-content: space-between;">
+        <span style="font-size: 15px; font-weight: 800;">الإجمالي</span>
+        <div style="display: flex; align-items: baseline; gap: 6px;">
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.02em;">539.00</span>
+          <span style="font-size: 14px; font-weight: 700; color: #52627f;">ر.س</span>
+        </div>
+      </div>
+
+      <!-- the multi-currency disclosure, again, at the decisive moment -->
+      <div style="display: flex; align-items: flex-start; gap: 10px; margin-top: 15px; padding: 12px 14px; border-radius: 12px; background: #f0e9df; border: 1px solid #d9d0c2;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a96f2d" stroke-width="2" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.9"/></svg>
+        <div style="font-size: 12px; line-height: 1.7; color: #52627f;">سيُحصَّل من بطاقتك <strong style="color: #1b2a4a; font-family: 'Plus Jakarta Sans', sans-serif;">528.00 د.إ</strong> — دون رسوم تحويل من بنكك.</div>
+      </div>
+    </div>
+
+    <!-- payment method -->
+    <div style="padding: 18px; border-radius: 18px; background: #fffdf9; border: 1px solid #d9d0c2;">
+      <div style="font-size: 13px; font-weight: 700; color: #52627f; margin-bottom: 14px;">طريقة الدفع</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 13px; border: 1.5px solid #a96f2d; background: rgba(216,162,93,0.09);">
+          <div style="width: 18px; height: 18px; border-radius: 50%; border: 5px solid #a96f2d; background: #fffdf9; flex-shrink: 0;"></div>
+          <div style="flex-grow: 1; font-size: 13.5px; font-weight: 700;">بطاقة ائتمان أو مدى</div>
+          <div style="display: flex; gap: 5px;">
+            <div style="width: 30px; height: 20px; border-radius: 4px; background: #1b2a4a;"></div>
+            <div style="width: 30px; height: 20px; border-radius: 4px; background: #d8a25d;"></div>
+            <div style="width: 30px; height: 20px; border-radius: 4px; background: #52627f;"></div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 13px 14px; border-radius: 13px; border: 1px solid #d9d0c2;">
+          <div style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #d9d0c2; flex-shrink: 0;"></div>
+          <div style="flex-grow: 1; font-size: 13.5px; font-weight: 600; color: #52627f;">Apple&nbsp;Pay</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- sticky pay bar -->
+  <div style="position: relative; padding: 16px 20px 22px; background: #fffdf9; border-top: 1px solid #d9d0c2; box-shadow: 0 -14px 34px rgba(200,150,90,0.14);">
+    <div style="padding: 17px; border-radius: 15px; background: #d8a25d; color: #1b2a4a; text-align: center; font-size: 16.5px; font-weight: 800; box-shadow: 0 12px 26px rgba(216,162,93,0.42);">ادفعي 528.00 د.إ</div>
+    <div style="margin-top: 12px; font-size: 11px; line-height: 1.7; color: #52627f; text-align: center;">بالمتابعة أنتِ توافقين على الشروط وسياسة الاسترداد. يتجدد الاشتراك شهرياً حتى الإلغاء.</div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #faf7f1; }
+    a { color: #a96f2d; } a:hover { color: #1b2a4a; }
+    * { box-sizing: border-box; }
+    .chip { padding: 9px 16px; border-radius: 999px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13.5px; font-weight: 600; color: #52627f; }
+    .chip-on { background: #1b2a4a; border-color: #1b2a4a; color: #fffaf2; font-weight: 700; }
+    .card { border-radius: 18px; background: #fffdf9; border: 1px solid #d9d0c2; overflow: hidden; box-shadow: 0 16px 36px rgba(200,150,90,0.10); display: flex; flex-direction: column; }
+    .thumb { height: 168px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .badge { position: absolute; top: 12px; inset-inline-start: 12px; padding: 4px 11px; border-radius: 999px; font-size: 10.5px; font-weight: 800; }
+  </style>
+</helmet>
+
+<div style="direction: rtl; font-family: 'Cairo', 'Segoe UI', sans-serif; background: #faf7f1; color: #1b2a4a; width: 1280px; min-height: 1040px; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; inset-inline-end: -170px; top: -190px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(216,162,93,0.30), rgba(216,162,93,0)); filter: blur(120px); pointer-events: none;"></div>
+
+  <!-- header -->
+  <div style="position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 44px; padding-inline-end: 392px; border-bottom: 1px solid #d9d0c2;">
+    <div style="display: flex; align-items: center; gap: 34px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(140deg, #1b2a4a, #34527f); display: flex; align-items: center; justify-content: center; color: #e2b274; font-weight: 800; font-size: 18px;">ز</div>
+        <span style="font-weight: 800; font-size: 19px;">الزين</span>
+      </div>
+      <div style="display: flex; gap: 22px; font-size: 15px; font-weight: 600; color: #52627f;">
+        <span>الرئيسية</span><span>الدورات</span><span style="color: #1b2a4a; font-weight: 700;">المتجر</span><span>من نحن</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="padding: 8px 14px; border-radius: 999px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13px; font-weight: 700; color: #52627f;">SAR ر.س</div>
+      <div style="position: relative; display: flex; align-items: center; gap: 8px; padding: 9px 17px; border-radius: 999px; background: #1b2a4a; color: #fffaf2; font-size: 13.5px; font-weight: 700;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.9"><path d="M4 5h2.2l2.1 10.5h9.5L20 8H7"/><circle cx="10" cy="19.5" r="1.4" fill="#e2b274" stroke="none"/><circle cx="17.5" cy="19.5" r="1.4" fill="#e2b274" stroke="none"/></svg>
+        السلة
+        <span style="min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #d8a25d; color: #1b2a4a; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; justify-content: center;">2</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative; padding: 36px 44px 44px; padding-inline-end: 392px;">
+
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 26px;">
+      <div style="max-width: 620px;">
+        <h1 style="margin: 0; font-size: 34px; font-weight: 800; letter-spacing: -0.025em;">المتجر</h1>
+        <p style="margin: 10px 0 0; font-size: 15.5px; line-height: 1.8; color: #52627f; text-wrap: pretty;">كتب ومواد مختارة بأيدي أساتذتنا — نفس الأدوات التي نستخدمها داخل الحصص.</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 9px; padding: 10px 15px; border-radius: 13px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13.5px; font-weight: 700; color: #52627f;">
+        <span>الأحدث</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="2.2"><path d="M5 9l7 7 7-7"/></svg>
+      </div>
+    </div>
+
+    <!-- filters -->
+    <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 28px; flex-wrap: wrap;">
+      <div class="chip chip-on">الكل</div>
+      <div class="chip">كتب المنهج</div>
+      <div class="chip">بطاقات ومراجعة</div>
+      <div class="chip">قرطاسية</div>
+      <div class="chip">مواد رقمية</div>
+      <div style="width: 1px; height: 26px; background: #d9d0c2; margin-inline: 6px;"></div>
+      <div class="chip" style="display: flex; align-items: center; gap: 7px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        المستوى: N5
+      </div>
+    </div>
+
+    <!-- grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+
+      <div class="card">
+        <div class="thumb" style="background: linear-gradient(140deg, #34527f, #1b2a4a);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.4"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M4 19h15"/></svg>
+          <span class="badge" style="background: #d8a25d; color: #1b2a4a;">الأكثر مبيعاً</span>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">كتب المنهج</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">Genki I — الطبعة الثالثة</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">الكتاب المعتمد في الدبلوم — الدروس 1 إلى 12.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;">185</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; background: #1b2a4a; color: #fffaf2; font-size: 12.5px; font-weight: 700;">أضف للسلة</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background: linear-gradient(140deg, #a96f2d, #d8a25d);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="1.4"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M8 9h8M8 13h5"/></svg>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">بطاقات ومراجعة</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">بطاقات الكانجي — N5</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">500 بطاقة مطبوعة بترتيب منهج JLPT.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;">95</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; background: #1b2a4a; color: #fffaf2; font-size: 12.5px; font-weight: 700;">أضف للسلة</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color: rgba(169,111,45,0.34);">
+        <div class="thumb" style="background: linear-gradient(140deg, #2f6f5a, #34527f);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.4"><path d="M12 3v12"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4 17v2.5A1.5 1.5 0 005.5 21h13a1.5 1.5 0 001.5-1.5V17"/></svg>
+          <span class="badge" style="background: #2f6f5a; color: #fffaf2;">تحميل فوري</span>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">مواد رقمية</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">حزمة مواد N5 الرقمية</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">أوراق تمارين PDF وملفات نطق صوتية — بلا شحن.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;">60</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; background: #1b2a4a; color: #fffaf2; font-size: 12.5px; font-weight: 700;">أضف للسلة</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb" style="background: linear-gradient(140deg, #52627f, #34527f);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.4"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M4 19h15"/></svg>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">كتب المنهج</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">Genki I — كتاب التمارين</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">تمارين مرافقة للكتاب الأساسي.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;">120</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; background: #1b2a4a; color: #fffaf2; font-size: 12.5px; font-weight: 700;">أضف للسلة</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- low stock -->
+      <div class="card" style="border-color: rgba(180,118,42,0.4);">
+        <div class="thumb" style="background: linear-gradient(140deg, #d8546a, #9d174d);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#fffaf2" stroke-width="1.4"><path d="M17 3l4 4L9 19l-5 1 1-5z"/><path d="M14.5 5.5l4 4"/></svg>
+          <span class="badge" style="background: #b4762a; color: #fffaf2;">بقي 3</span>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">قرطاسية</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">طقم أقلام الخط الياباني</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">3 أقلام بأسنّة مختلفة لكتابة الكانجي.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700;">70</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; background: #1b2a4a; color: #fffaf2; font-size: 12.5px; font-weight: 700;">أضف للسلة</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- sold out -->
+      <div class="card" style="opacity: 0.72;">
+        <div class="thumb" style="background: linear-gradient(140deg, #b3aca1, #d9d0c2);">
+          <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#fffdf9" stroke-width="1.4"><rect x="4" y="4" width="16" height="16" rx="2.5"/><path d="M8 8.5h8M8 12h8M8 15.5h5"/></svg>
+          <span class="badge" style="background: #52627f; color: #fffaf2;">نفدت الكمية</span>
+        </div>
+        <div style="padding: 16px 18px 18px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 11.5px; font-weight: 700; color: #a96f2d;">قرطاسية</div>
+          <div style="margin-top: 6px; font-size: 15px; font-weight: 700; line-height: 1.5;">دفتر كتابة الكانجي</div>
+          <div style="margin-top: 6px; font-size: 12.5px; color: #52627f; line-height: 1.65; flex-grow: 1;">دفتر مربّعات Genkouyoushi — 80 صفحة.</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: #52627f;">45</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">ر.س</span>
+            </div>
+            <div style="padding: 9px 15px; border-radius: 11px; border: 1px solid #d9d0c2; color: #52627f; font-size: 12.5px; font-weight: 700;">أبلغيني</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- cart drawer -->
+  <div style="position: absolute; inset-inline-end: 0; top: 0; bottom: 0; width: 348px; background: #fffdf9; border-inline-end: 1px solid #d9d0c2; box-shadow: -30px 0 70px rgba(27,42,74,0.16); display: flex; flex-direction: column;">
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 22px; border-bottom: 1px solid #d9d0c2;">
+      <div style="font-size: 16px; font-weight: 800;">سلّتك</div>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </div>
+
+    <div style="flex-grow: 1; padding: 18px 22px; display: flex; flex-direction: column; gap: 16px;">
+      <div style="display: flex; gap: 12px;">
+        <div style="width: 54px; height: 54px; border-radius: 12px; background: linear-gradient(140deg, #34527f, #1b2a4a); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.6"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/></svg>
+        </div>
+        <div style="flex-grow: 1; min-width: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; line-height: 1.45;">Genki I — الطبعة الثالثة</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 9px;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px; border-radius: 9px; border: 1px solid #d9d0c2;">
+              <span style="font-size: 14px; color: #52627f;">−</span>
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">1</span>
+              <span style="font-size: 14px; color: #52627f;">+</span>
+            </div>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; font-weight: 700;">185</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <div style="width: 54px; height: 54px; border-radius: 12px; background: linear-gradient(140deg, #2f6f5a, #34527f); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.6"><path d="M12 3v12"/><path d="M7.5 10.5L12 15l4.5-4.5"/><path d="M4 17v2.5A1.5 1.5 0 005.5 21h13a1.5 1.5 0 001.5-1.5V17"/></svg>
+        </div>
+        <div style="flex-grow: 1; min-width: 0;">
+          <div style="font-size: 13.5px; font-weight: 700; line-height: 1.45;">حزمة مواد N5 الرقمية</div>
+          <div style="font-size: 11px; color: #2f6f5a; font-weight: 700; margin-top: 3px;">بلا شحن — تحميل فوري</div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 7px;">
+            <div style="display: flex; align-items: center; gap: 10px; padding: 4px 10px; border-radius: 9px; border: 1px solid #d9d0c2;">
+              <span style="font-size: 14px; color: #52627f;">−</span>
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">1</span>
+              <span style="font-size: 14px; color: #52627f;">+</span>
+            </div>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; font-weight: 700;">60</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 4px; padding: 13px 15px; border-radius: 13px; background: rgba(216,162,93,0.12); border: 1px dashed rgba(169,111,45,0.42); font-size: 12px; line-height: 1.7; color: #52627f;">
+        أضيفي 55 ر.س للحصول على <strong style="color: #a96f2d;">شحن مجاني</strong> داخل السعودية.
+      </div>
+    </div>
+
+    <div style="padding: 20px 22px; border-top: 1px solid #d9d0c2;">
+      <div style="display: flex; flex-direction: column; gap: 9px; font-size: 13px; margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between;"><span style="color: #52627f;">المجموع الفرعي</span><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;">245.00</span></div>
+        <div style="display: flex; justify-content: space-between;"><span style="color: #52627f;">الشحن</span><span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;">35.00</span></div>
+      </div>
+      <div style="padding: 15px; border-radius: 14px; background: #d8a25d; color: #1b2a4a; text-align: center; font-size: 15.5px; font-weight: 800; box-shadow: 0 12px 26px rgba(216,162,93,0.38);">إتمام الطلب — 280 ر.س</div>
+      <div style="margin-top: 10px; font-size: 11px; text-align: center; color: #52627f;">سيُحصَّل بالدرهم الإماراتي عند الدفع</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

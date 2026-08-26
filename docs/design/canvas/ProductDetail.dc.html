@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #faf7f1; }
+    a { color: #a96f2d; } a:hover { color: #1b2a4a; }
+    * { box-sizing: border-box; }
+    .variant { padding: 11px 18px; border-radius: 12px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13.5px; font-weight: 600; color: #52627f; text-align: center; }
+    .variant-on { border: 1.5px solid #a96f2d; background: rgba(216,162,93,0.11); color: #1b2a4a; font-weight: 700; }
+    .variant-off { background: #f3efe8; border-color: #ece5da; color: #b3aca1; text-decoration: line-through; }
+  </style>
+</helmet>
+
+<div style="direction: rtl; font-family: 'Cairo', 'Segoe UI', sans-serif; background: #faf7f1; color: #1b2a4a; width: 1280px; min-height: 980px; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; inset-inline-start: -150px; top: 260px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(216,162,93,0.26), rgba(216,162,93,0)); filter: blur(120px); pointer-events: none;"></div>
+
+  <!-- header -->
+  <div style="position: relative; display: flex; align-items: center; justify-content: space-between; padding: 20px 44px; border-bottom: 1px solid #d9d0c2;">
+    <div style="display: flex; align-items: center; gap: 34px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(140deg, #1b2a4a, #34527f); display: flex; align-items: center; justify-content: center; color: #e2b274; font-weight: 800; font-size: 18px;">ز</div>
+        <span style="font-weight: 800; font-size: 19px;">الزين</span>
+      </div>
+      <div style="display: flex; gap: 22px; font-size: 15px; font-weight: 600; color: #52627f;">
+        <span>الرئيسية</span><span>الدورات</span><span style="color: #1b2a4a; font-weight: 700;">المتجر</span><span>من نحن</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="padding: 8px 14px; border-radius: 999px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13px; font-weight: 700; color: #52627f;">SAR ر.س</div>
+      <div style="display: flex; align-items: center; gap: 8px; padding: 9px 17px; border-radius: 999px; background: #1b2a4a; color: #fffaf2; font-size: 13.5px; font-weight: 700;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="1.9"><path d="M4 5h2.2l2.1 10.5h9.5L20 8H7"/><circle cx="10" cy="19.5" r="1.4" fill="#e2b274" stroke="none"/><circle cx="17.5" cy="19.5" r="1.4" fill="#e2b274" stroke="none"/></svg>
+        السلة
+        <span style="min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #d8a25d; color: #1b2a4a; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11.5px; font-weight: 700; display: flex; align-items: center; justify-content: center;">2</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative; padding: 22px 44px 44px;">
+
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #52627f; margin-bottom: 24px;">
+      <span>المتجر</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b3aca1" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg>
+      <span>كتب المنهج</span>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b3aca1" stroke-width="2.4"><path d="M15 5l-7 7 7 7"/></svg>
+      <span style="color: #1b2a4a; font-weight: 700;">Genki I</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 44px; align-items: start;">
+
+      <!-- gallery -->
+      <div>
+        <div style="height: 430px; border-radius: 22px; background: linear-gradient(150deg, #34527f 0%, #1b2a4a 70%); display: flex; align-items: center; justify-content: center; box-shadow: 0 34px 70px rgba(27,42,74,0.26); position: relative;">
+          <svg width="140" height="140" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="0.9"><path d="M4 5.5A2.5 2.5 0 016.5 3H19v16H6.5A2.5 2.5 0 004 21.5z"/><path d="M4 19h15"/><path d="M8 7.5h7M8 10.5h7M8 13.5h4"/></svg>
+          <span style="position: absolute; top: 18px; inset-inline-start: 18px; padding: 5px 13px; border-radius: 999px; background: #d8a25d; color: #1b2a4a; font-size: 11.5px; font-weight: 800;">الأكثر مبيعاً</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px;">
+          <div style="height: 84px; border-radius: 14px; background: linear-gradient(150deg, #34527f, #1b2a4a); border: 2px solid #a96f2d;"></div>
+          <div style="height: 84px; border-radius: 14px; background: linear-gradient(150deg, #52627f, #34527f); border: 1px solid #d9d0c2;"></div>
+          <div style="height: 84px; border-radius: 14px; background: linear-gradient(150deg, #a96f2d, #d8a25d); border: 1px solid #d9d0c2;"></div>
+          <div style="height: 84px; border-radius: 14px; background: linear-gradient(150deg, #ece5da, #d9d0c2); border: 1px solid #d9d0c2;"></div>
+        </div>
+      </div>
+
+      <!-- buy panel -->
+      <div>
+        <div style="font-size: 12px; font-weight: 700; color: #a96f2d;">كتب المنهج · المستوى N5</div>
+        <h1 style="margin: 10px 0 0; font-size: 33px; line-height: 1.35; font-weight: 800; letter-spacing: -0.025em; text-wrap: pretty;">Genki I — الطبعة الثالثة</h1>
+        <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.85; color: #52627f; text-wrap: pretty;">الكتاب المعتمد في دبلوم اليابانية عندنا. يغطّي الدروس 1–12 مع الهيراغانا والكاتاكانا والقواعد الأساسية، ويأتي بقرص المحتوى الصوتي.</p>
+
+        <div style="display: flex; align-items: baseline; gap: 11px; margin-top: 24px;">
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 38px; font-weight: 700; letter-spacing: -0.03em;">185</span>
+          <span style="font-size: 15px; font-weight: 700; color: #52627f;">ر.س</span>
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; color: #52627f; text-decoration: line-through;">220</span>
+        </div>
+        <div style="margin-top: 8px; font-size: 12.5px; color: #52627f;">سيُحصَّل <strong style="color: #1b2a4a; font-family: 'Plus Jakarta Sans', sans-serif;">181 د.إ</strong> على بطاقتك</div>
+
+        <!-- variants -->
+        <div style="margin-top: 26px;">
+          <div style="font-size: 13px; font-weight: 700; margin-bottom: 11px;">النسخة</div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+            <div class="variant variant-on">ورقية</div>
+            <div class="variant">ورقية + كتاب التمارين</div>
+            <div class="variant variant-off">نسخة مستعملة</div>
+          </div>
+        </div>
+
+        <!-- stock -->
+        <div style="display: flex; align-items: center; gap: 9px; margin-top: 20px; font-size: 13px; font-weight: 700; color: #b4762a;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #b4762a;"></span>
+          بقي 6 نسخ فقط
+        </div>
+
+        <!-- qty + add -->
+        <div style="display: flex; align-items: stretch; gap: 12px; margin-top: 20px;">
+          <div style="display: flex; align-items: center; gap: 18px; padding: 0 18px; border-radius: 14px; border: 1px solid #d9d0c2; background: #fffdf9;">
+            <span style="font-size: 18px; color: #52627f;">−</span>
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700;">1</span>
+            <span style="font-size: 18px; color: #52627f;">+</span>
+          </div>
+          <div style="flex-grow: 1; padding: 17px; border-radius: 14px; background: #d8a25d; color: #1b2a4a; text-align: center; font-size: 16px; font-weight: 800; box-shadow: 0 12px 26px rgba(216,162,93,0.4);">أضيفي إلى السلة</div>
+        </div>
+
+        <!-- shipping / trust -->
+        <div style="margin-top: 22px; padding: 18px 20px; border-radius: 16px; background: #fffdf9; border: 1px solid #d9d0c2; display: flex; flex-direction: column; gap: 13px; font-size: 13px; color: #52627f;">
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a96f2d" stroke-width="1.9" style="flex-shrink: 0;"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+            الشحن إلى <strong style="color: #1b2a4a;">الرياض</strong> — 35 ر.س · 3–5 أيام عمل
+          </div>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2f6f5a" stroke-width="1.9" style="flex-shrink: 0;"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.3l2.4 2.4 4.6-4.9"/></svg>
+            شحن مجاني للطلبات فوق 300 ر.س
+          </div>
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="1.9" style="flex-shrink: 0;"><path d="M4 12a8 8 0 1114.5 4.6"/><path d="M19 12v5h-5"/></svg>
+            إرجاع خلال 14 يوماً إذا كان الكتاب غير مفتوح
+          </div>
+        </div>
+
+        <!-- bundle cross-sell -->
+        <div style="margin-top: 16px; padding: 18px 20px; border-radius: 16px; background: linear-gradient(140deg, rgba(216,162,93,0.15), rgba(226,178,116,0.05)); border: 1px solid rgba(169,111,45,0.32);">
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#a96f2d" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg>
+            <div>
+              <div style="font-size: 14px; font-weight: 800;">اشتريه مع الدبلوم ووفّري 15%</div>
+              <div style="margin-top: 5px; font-size: 12.5px; line-height: 1.7; color: #52627f;">الطالبات المشتركات في دبلوم اليابانية يحصلن على خصم تلقائي على كل كتب المنهج.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- details tabs -->
+    <div style="margin-top: 44px; border-top: 1px solid #d9d0c2; padding-top: 28px;">
+      <div style="display: flex; gap: 28px; font-size: 15px; font-weight: 700; color: #52627f; margin-bottom: 22px;">
+        <span style="color: #1b2a4a; padding-bottom: 10px; border-bottom: 2.5px solid #d8a25d;">التفاصيل</span>
+        <span>المواصفات</span>
+        <span>الشحن والإرجاع</span>
+        <span>آراء الطلاب (24)</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;">
+        <div style="padding: 18px 20px; border-radius: 16px; background: #fffdf9; border: 1px solid #ece5da;">
+          <div style="font-size: 12px; font-weight: 700; color: #52627f;">الناشر</div>
+          <div style="margin-top: 6px; font-size: 14.5px; font-weight: 700;">The Japan Times</div>
+        </div>
+        <div style="padding: 18px 20px; border-radius: 16px; background: #fffdf9; border: 1px solid #ece5da;">
+          <div style="font-size: 12px; font-weight: 700; color: #52627f;">عدد الصفحات</div>
+          <div style="margin-top: 6px; font-size: 14.5px; font-weight: 700; font-family: 'Plus Jakarta Sans', sans-serif;">392</div>
+        </div>
+        <div style="padding: 18px 20px; border-radius: 16px; background: #fffdf9; border: 1px solid #ece5da;">
+          <div style="font-size: 12px; font-weight: 700; color: #52627f;">لغة الشرح</div>
+          <div style="margin-top: 6px; font-size: 14.5px; font-weight: 700;">إنجليزي / ياباني</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

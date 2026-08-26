@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: alzenins-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: alzenins
+      POSTGRES_PASSWORD: alzenins
+      POSTGRES_DB: alzenins
+    ports:
+      - "5433:5432"
+    volumes:
+      - alzenins-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alzenins -d alzenins"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  alzenins-pgdata:

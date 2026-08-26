@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "siteName": "Alzenins",
+    "siteTagline": "Alzenins Language Centre",
+    "homeTitle": "Alzenins — Language Centre",
+    "homeDescription": "Learn Japanese and more with Alzenins — live classes that are genuinely fun and effective, taught through anime and games."
+  },
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "store": "Store",
+    "about": "About",
+    "contact": "Contact",
+    "signIn": "Sign in",
+    "dashboard": "Dashboard",
+    "switchLocale": "العربية",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "home": {
+    "eyebrow": "Japanese Diploma · N5 to N3",
+    "title": "Learn Japanese the way you actually enjoy",
+    "subtitle": "Live classes with Arab teachers and native speakers — taught through anime and games, not memorisation. Over 400 students since 2020.",
+    "ctaPrimary": "Browse courses",
+    "ctaSecondary": "Talk to us",
+    "stats": {
+      "students": "students since 2020",
+      "instructors": "certified instructors",
+      "level": "target level"
+    }
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Pick the track that fits your level and your schedule.",
+    "perMonth": "per month",
+    "seatsLeft": "{count} of {total} seats left",
+    "soldOut": "Fully booked",
+    "joinWaitlist": "Join the waitlist",
+    "enrol": "Reserve your seat"
+  },
+  "store": {
+    "title": "Store",
+    "subtitle": "Books and materials curated by our teachers.",
+    "comingSoon": "We're preparing the catalogue — announcement coming soon."
+  },
+  "about": {
+    "title": "About us",
+    "subtitle": "Alzenins Language Centre — from the UAE to the Arab world."
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Questions about courses, schedules or pricing — we reply within one working day."
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "notFoundTitle": "Page not found",
+    "notFoundBody": "The link you opened no longer exists or has moved.",
+    "backHome": "Back to home"
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "terms": "Terms & conditions",
+    "privacy": "Privacy policy",
+    "refunds": "Refund policy"
+  }
+}

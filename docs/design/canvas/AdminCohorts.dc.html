@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #faf7f1; }
+    a { color: #a96f2d; } a:hover { color: #1b2a4a; }
+    * { box-sizing: border-box; }
+    .cell { font-size: 13.5px; }
+    .row { display: grid; grid-template-columns: 2.1fr 1.1fr 1.5fr 1fr 0.9fr 0.7fr; gap: 16px; align-items: center; padding: 16px 20px; }
+  </style>
+</helmet>
+
+<div style="direction: rtl; font-family: 'Cairo', 'Segoe UI', sans-serif; background: #faf7f1; color: #1b2a4a; width: 1280px; min-height: 860px; display: flex;">
+
+  <!-- sidebar -->
+  <div style="width: 224px; flex-shrink: 0; background: #1b2a4a; color: #fffaf2; padding: 24px 16px; display: flex; flex-direction: column; gap: 26px;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+      <div style="width: 34px; height: 34px; border-radius: 11px; background: rgba(226,178,116,0.2); border: 1px solid rgba(226,178,116,0.4); display: flex; align-items: center; justify-content: center; color: #e2b274; font-weight: 800; font-size: 16px;">ز</div>
+      <div>
+        <div style="font-weight: 800; font-size: 15px;">الزين</div>
+        <div style="font-size: 10.5px; color: rgba(255,250,242,0.55);">لوحة الإدارة</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 3px;">
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">نظرة عامة</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 700; background: rgba(226,178,116,0.16); color: #e2b274;">المجموعات والمقاعد</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">الطلاب</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">الأساتذة</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">الاشتراكات</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">الكتالوج والأسعار</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">المتجر والطلبات</div>
+      <div style="padding: 10px 13px; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: rgba(255,250,242,0.72);">سجل التدقيق</div>
+    </div>
+  </div>
+
+  <!-- content -->
+  <div style="flex-grow: 1; padding: 28px 32px;">
+
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 24px;">
+      <div>
+        <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em;">المجموعات والمقاعد</div>
+        <div style="margin-top: 6px; font-size: 14px; color: #52627f;">7 مجموعات نشطة · 63 مقعداً مشغولاً من 84</div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <div style="padding: 11px 18px; border-radius: 13px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 13.5px; font-weight: 700; color: #52627f;">تصدير</div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 13px; background: #1b2a4a; color: #fffaf2; font-size: 13.5px; font-weight: 700;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b274" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          مجموعة جديدة
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 24px;">
+      <div style="padding: 18px 20px; border-radius: 17px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 14px 30px rgba(200,150,90,0.09);">
+        <div style="font-size: 12.5px; color: #52627f; font-weight: 600;">الإيراد الشهري المتكرر</div>
+        <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 8px;">
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; font-weight: 700;">24,570</span>
+          <span style="font-size: 12.5px; font-weight: 700; color: #52627f;">د.إ</span>
+        </div>
+        <div style="margin-top: 7px; font-size: 11.5px; font-weight: 700; color: #2f6f5a;">+12% عن الشهر الماضي</div>
+      </div>
+      <div style="padding: 18px 20px; border-radius: 17px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 14px 30px rgba(200,150,90,0.09);">
+        <div style="font-size: 12.5px; color: #52627f; font-weight: 600;">نسبة إشغال المقاعد</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; font-weight: 700; margin-top: 8px;">75%</div>
+        <div style="margin-top: 9px; height: 6px; border-radius: 999px; background: #ece5da; overflow: hidden;"><div style="width: 75%; height: 100%; background: #d8a25d;"></div></div>
+      </div>
+      <div style="padding: 18px 20px; border-radius: 17px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 14px 30px rgba(200,150,90,0.09);">
+        <div style="font-size: 12.5px; color: #52627f; font-weight: 600;">قائمة الانتظار</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; font-weight: 700; margin-top: 8px;">18</div>
+        <div style="margin-top: 7px; font-size: 11.5px; font-weight: 700; color: #b4762a;">تحتاج مجموعة جديدة</div>
+      </div>
+      <div style="padding: 18px 20px; border-radius: 17px; background: #fffdf9; border: 1px solid rgba(163,50,64,0.32); box-shadow: 0 14px 30px rgba(163,50,64,0.10);">
+        <div style="font-size: 12.5px; color: #52627f; font-weight: 600;">اشتراكات متعثّرة</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 25px; font-weight: 700; margin-top: 8px; color: #a33240;">4</div>
+        <div style="margin-top: 7px; font-size: 11.5px; font-weight: 700; color: #a33240;">في مرحلة المتابعة</div>
+      </div>
+    </div>
+
+    <!-- table -->
+    <div style="border-radius: 20px; background: #fffdf9; border: 1px solid #d9d0c2; overflow: hidden; box-shadow: 0 20px 44px rgba(200,150,90,0.11);">
+      <div class="row" style="background: #f0e9df; border-bottom: 1px solid #d9d0c2; font-size: 12px; font-weight: 800; color: #52627f;">
+        <div>المجموعة</div><div>الأستاذ</div><div>المقاعد</div><div>الموعد</div><div>الحالة</div><div></div>
+      </div>
+
+      <div class="row" style="border-bottom: 1px solid #ece5da;">
+        <div class="cell">
+          <div style="font-weight: 700;">دبلوم اليابانية — أ</div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 3px;">N5 → N3 · بدأت 3 يوليو</div>
+        </div>
+        <div class="cell" style="color: #52627f;">راما</div>
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">9 / 12</span>
+            <span style="font-size: 11px; font-weight: 700; color: #b4762a;">بقي 3</span>
+          </div>
+          <div style="height: 7px; border-radius: 999px; background: #ece5da; overflow: hidden;"><div style="width: 75%; height: 100%; background: #d8a25d;"></div></div>
+        </div>
+        <div class="cell" style="color: #52627f; font-size: 12.5px;">إثنين · أربعاء<br>18:00 GST</div>
+        <div><span style="padding: 5px 12px; border-radius: 999px; background: rgba(47,111,90,0.14); color: #2f6f5a; font-size: 11.5px; font-weight: 800;">مفتوحة</span></div>
+        <div style="display: flex; justify-content: flex-end;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#52627f"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></div>
+      </div>
+
+      <div class="row" style="border-bottom: 1px solid #ece5da; background: rgba(216,162,93,0.06);">
+        <div class="cell">
+          <div style="display: flex; align-items: center; gap: 7px;">
+            <span style="font-weight: 700;">دبلوم اليابانية — ب</span>
+            <span style="padding: 2px 8px; border-radius: 999px; background: rgba(157,23,77,0.12); color: #9d174d; font-size: 10px; font-weight: 800;">نسائية</span>
+          </div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 3px;">N5 → N3 · بدأت 10 يوليو</div>
+        </div>
+        <div class="cell" style="color: #52627f;">أنيسة</div>
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">12 / 12</span>
+            <span style="font-size: 11px; font-weight: 700; color: #a33240;">مكتملة</span>
+          </div>
+          <div style="height: 7px; border-radius: 999px; background: #ece5da; overflow: hidden;"><div style="width: 100%; height: 100%; background: #a33240;"></div></div>
+        </div>
+        <div class="cell" style="color: #52627f; font-size: 12.5px;">أحد · ثلاثاء<br>19:00 GST</div>
+        <div><span style="padding: 5px 12px; border-radius: 999px; background: rgba(180,118,42,0.16); color: #b4762a; font-size: 11.5px; font-weight: 800;">11 بالانتظار</span></div>
+        <div style="display: flex; justify-content: flex-end;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#52627f"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></div>
+      </div>
+
+      <div class="row" style="border-bottom: 1px solid #ece5da;">
+        <div class="cell">
+          <div style="font-weight: 700;">تحضير JLPT N4</div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 3px;">مكثّف · بدأت 1 أغسطس</div>
+        </div>
+        <div class="cell" style="color: #52627f;">أمجد</div>
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">6 / 10</span>
+            <span style="font-size: 11px; font-weight: 700; color: #52627f;">بقي 4</span>
+          </div>
+          <div style="height: 7px; border-radius: 999px; background: #ece5da; overflow: hidden;"><div style="width: 60%; height: 100%; background: #34527f;"></div></div>
+        </div>
+        <div class="cell" style="color: #52627f; font-size: 12.5px;">سبت<br>11:00 GST</div>
+        <div><span style="padding: 5px 12px; border-radius: 999px; background: rgba(47,111,90,0.14); color: #2f6f5a; font-size: 11.5px; font-weight: 800;">مفتوحة</span></div>
+        <div style="display: flex; justify-content: flex-end;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#52627f"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></div>
+      </div>
+
+      <div class="row" style="border-bottom: 1px solid #ece5da;">
+        <div class="cell">
+          <div style="font-weight: 700;">اليابانية للأطفال</div>
+          <div style="font-size: 11.5px; color: #52627f; margin-top: 3px;">8–12 سنة · تبدأ 15 سبتمبر</div>
+        </div>
+        <div class="cell" style="color: #52627f;">راما</div>
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;">2 / 8</span>
+            <span style="font-size: 11px; font-weight: 700; color: #52627f;">بقي 6</span>
+          </div>
+          <div style="height: 7px; border-radius: 999px; background: #ece5da; overflow: hidden;"><div style="width: 25%; height: 100%; background: #34527f;"></div></div>
+        </div>
+        <div class="cell" style="color: #52627f; font-size: 12.5px;">جمعة<br>16:00 GST</div>
+        <div><span style="padding: 5px 12px; border-radius: 999px; background: #ece5da; color: #52627f; font-size: 11.5px; font-weight: 800;">مسودة</span></div>
+        <div style="display: flex; justify-content: flex-end;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#52627f"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></div>
+      </div>
+
+      <!-- inline action row -->
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; background: #f0e9df;">
+        <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #52627f;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b4762a" stroke-width="2"><path d="M12 4l8.5 15h-17z"/><path d="M12 10v4M12 16.5v.5"/></svg>
+          المجموعة ب ممتلئة و11 طالبة على قائمة الانتظار.
+        </div>
+        <div style="display: flex; gap: 9px;">
+          <div style="padding: 9px 16px; border-radius: 11px; border: 1px solid #d9d0c2; background: #fffdf9; font-size: 12.5px; font-weight: 700;">أضف مقاعد</div>
+          <div style="padding: 9px 16px; border-radius: 11px; background: #d8a25d; color: #1b2a4a; font-size: 12.5px; font-weight: 800;">افتح مجموعة ج</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

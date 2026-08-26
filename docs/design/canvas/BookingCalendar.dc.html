@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #faf7f1; }
+    a { color: #a96f2d; } a:hover { color: #1b2a4a; }
+    * { box-sizing: border-box; }
+    .slot { padding: 11px 6px; border-radius: 11px; border: 1px solid #d9d0c2; background: #fffdf9; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13.5px; font-weight: 600; color: #1b2a4a; text-align: center; }
+    .slot-off { background: #f3efe8; border-color: #ece5da; color: #b3aca1; }
+    .slot-on { background: #1b2a4a; border-color: #1b2a4a; color: #fffaf2; box-shadow: 0 10px 22px rgba(27,42,74,0.28); }
+  </style>
+</helmet>
+
+<div style="direction: rtl; font-family: 'Cairo', 'Segoe UI', sans-serif; background: #faf7f1; color: #1b2a4a; width: 1160px; min-height: 880px; padding: 34px 38px; position: relative; overflow: hidden;">
+
+  <div style="position: absolute; inset-inline-start: -160px; bottom: -180px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(216,162,93,0.26), rgba(216,162,93,0)); filter: blur(120px); pointer-events: none;"></div>
+
+  <div style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 26px;">
+    <div>
+      <div style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em;">احجزي محادثة مع ناطق أصلي</div>
+      <div style="margin-top: 7px; font-size: 14.5px; color: #52627f;">الأوقات معروضة بتوقيتك — الرياض (GMT+3)</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 14px; background: linear-gradient(140deg, rgba(216,162,93,0.18), rgba(226,178,116,0.08)); border: 1px solid rgba(169,111,45,0.32);">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a96f2d" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>
+      <div>
+        <div style="font-size: 14px; font-weight: 800;">4 حصص متبقية</div>
+        <div style="font-size: 11.5px; color: #52627f;">تنتهي في 12 نوفمبر</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: relative; display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: 26px; align-items: start;">
+
+    <!-- calendar -->
+    <div style="padding: 26px; border-radius: 22px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 24px 50px rgba(200,150,90,0.13);">
+
+      <!-- teacher filter -->
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
+        <div style="display: flex; align-items: center; gap: 9px; padding: 8px 8px 8px 15px; border-radius: 999px; background: #1b2a4a; color: #fffaf2;">
+          <span style="font-size: 13px; font-weight: 700;">كينجي · طوكيو</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(140deg, #9d174d, #d8546a); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800;">け</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 9px; padding: 8px 8px 8px 15px; border-radius: 999px; border: 1px solid #d9d0c2; color: #52627f;">
+          <span style="font-size: 13px; font-weight: 700;">آيكو · أوساكا</span>
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #ece5da; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #52627f;">あ</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 9px; padding: 8px 8px 8px 15px; border-radius: 999px; border: 1px solid #d9d0c2; color: #52627f;">
+          <span style="font-size: 13px; font-weight: 700;">كل الأساتذة</span>
+        </div>
+      </div>
+
+      <!-- week nav -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+        <div style="font-size: 16px; font-weight: 800;">27 أغسطس – 2 سبتمبر</div>
+        <div style="display: flex; gap: 8px;">
+          <div style="width: 34px; height: 34px; border-radius: 11px; border: 1px solid #d9d0c2; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg>
+          </div>
+          <div style="width: 34px; height: 34px; border-radius: 11px; border: 1px solid #d9d0c2; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#52627f" stroke-width="2.2"><path d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- day headers -->
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 9px; margin-bottom: 11px;">
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">الأحد</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">27</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">الإثنين</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">28</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #a96f2d;">الثلاثاء</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; color: #a96f2d;">29</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">الأربعاء</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">30</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">الخميس</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">31</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">الجمعة</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">01</div></div>
+        <div style="text-align: center;"><div style="font-size: 12px; font-weight: 700; color: #52627f;">السبت</div><div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700;">02</div></div>
+      </div>
+
+      <div style="height: 1px; background: #ece5da; margin-bottom: 14px;"></div>
+
+      <!-- slot grid -->
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 9px;">
+        <div class="slot">15:30</div><div class="slot">15:30</div><div class="slot">15:30</div><div class="slot slot-off">—</div><div class="slot">15:30</div><div class="slot slot-off">—</div><div class="slot slot-off">—</div>
+        <div class="slot">16:00</div><div class="slot slot-off">—</div><div class="slot">16:00</div><div class="slot">16:00</div><div class="slot">16:00</div><div class="slot slot-off">—</div><div class="slot slot-off">—</div>
+        <div class="slot slot-off">—</div><div class="slot">16:30</div><div class="slot">16:30</div><div class="slot">16:30</div><div class="slot slot-off">—</div><div class="slot slot-off">—</div><div class="slot">16:30</div>
+        <div class="slot">17:00</div><div class="slot">17:00</div><div class="slot slot-on">17:00</div><div class="slot">17:00</div><div class="slot">17:00</div><div class="slot slot-off">—</div><div class="slot">17:00</div>
+        <div class="slot">17:30</div><div class="slot slot-off">—</div><div class="slot">17:30</div><div class="slot slot-off">—</div><div class="slot">17:30</div><div class="slot slot-off">—</div><div class="slot">17:30</div>
+        <div class="slot slot-off">—</div><div class="slot">18:00</div><div class="slot">18:00</div><div class="slot">18:00</div><div class="slot slot-off">—</div><div class="slot slot-off">—</div><div class="slot slot-off">—</div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; margin-top: 22px; padding-top: 18px; border-top: 1px solid #ece5da; font-size: 12.5px; color: #52627f;">
+        <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 13px; height: 13px; border-radius: 4px; background: #fffdf9; border: 1px solid #d9d0c2;"></span> متاح</div>
+        <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 13px; height: 13px; border-radius: 4px; background: #1b2a4a;"></span> اختياركِ</div>
+        <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 13px; height: 13px; border-radius: 4px; background: #f3efe8; border: 1px solid #ece5da;"></span> غير متاح</div>
+      </div>
+    </div>
+
+    <!-- summary panel -->
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="padding: 24px; border-radius: 22px; background: #fffdf9; border: 1px solid #d9d0c2; box-shadow: 0 24px 50px rgba(200,150,90,0.13);">
+        <div style="font-size: 13px; font-weight: 700; color: #52627f; margin-bottom: 16px;">تأكيد الحجز</div>
+
+        <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #ece5da;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(140deg, #9d174d, #d8546a); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fffaf2;">け</div>
+          <div>
+            <div style="font-size: 14.5px; font-weight: 700;">كينجي</div>
+            <div style="font-size: 12px; color: #52627f; margin-top: 2px;">ناطق أصلي · طوكيو</div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 13px; padding: 16px 0; border-bottom: 1px solid #ece5da;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 13px; color: #52627f;">التاريخ</span>
+            <span style="font-size: 13.5px; font-weight: 700;">الثلاثاء 29 أغسطس</span>
+          </div>
+          <div style="display: flex; align-items: flex-start; justify-content: space-between;">
+            <span style="font-size: 13px; color: #52627f;">الوقت</span>
+            <div style="text-align: end;">
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14.5px; font-weight: 700;">17:00 – 17:30</div>
+              <div style="font-size: 11.5px; color: #52627f; margin-top: 3px;">23:00 بتوقيت كينجي</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-size: 13px; color: #52627f;">التكلفة</span>
+            <span style="font-size: 13.5px; font-weight: 800; color: #a96f2d;">حصة واحدة</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 18px; padding: 15px; border-radius: 13px; background: #d8a25d; color: #1b2a4a; text-align: center; font-size: 15.5px; font-weight: 800; box-shadow: 0 12px 26px rgba(216,162,93,0.36);">أكّدي الحجز</div>
+        <div style="margin-top: 12px; font-size: 11.5px; line-height: 1.7; color: #52627f; text-align: center;">إلغاء مجاني حتى 24 ساعة قبل الموعد — بعدها تُخصم الحصة.</div>
+      </div>
+
+      <div style="padding: 20px 22px; border-radius: 20px; background: #f0e9df; border: 1px solid #d9d0c2;">
+        <div style="display: flex; align-items: flex-start; gap: 10px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#a96f2d" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.9"/></svg>
+          <div style="font-size: 12.5px; line-height: 1.75; color: #52627f;">بعد الحجز بحصتين فقط سينتهي رصيدك. <span style="color: #a96f2d; font-weight: 700;">اشتري باقة جديدة</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
