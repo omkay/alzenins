@@ -51,6 +51,46 @@
     "title": "Contact us",
     "subtitle": "Questions about courses, schedules or pricing — we reply within one working day."
   },
+  "auth": {
+    "title": "Sign in",
+    "subtitle": "Enter your email and we'll send you a six-digit code.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "name@example.com",
+    "sendCode": "Send code",
+    "sending": "Sending…",
+    "codeTitle": "Enter your code",
+    "codeSubtitle": "We sent a six-digit code to {email}. It expires in 10 minutes.",
+    "codeLabel": "Sign-in code",
+    "verify": "Verify and sign in",
+    "verifying": "Verifying…",
+    "changeEmail": "Use a different email",
+    "resend": "Resend the code",
+    "google": "Continue with Google",
+    "or": "or",
+    "errorSend": "Couldn't send the code. Check the address and try again.",
+    "errorVerify": "That code is wrong or has expired.",
+    "signOut": "Sign out",
+    "devHint": "Development: the code is printed to the server log."
+  },
+  "dashboard": {
+    "greeting": "Hello {name}",
+    "empty": "No upcoming classes yet. Browse the courses to get started.",
+    "browseCourses": "Browse courses",
+    "profile": "Profile"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "These settings drive your interface language, the currency you see, and the times your classes are shown in.",
+    "name": "Name",
+    "email": "Email",
+    "locale": "Interface language",
+    "country": "Country",
+    "timezone": "Time zone",
+    "role": "Role",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Saved"
+  },
   "common": {
     "loading": "Loading…",
     "error": "Something went wrong",

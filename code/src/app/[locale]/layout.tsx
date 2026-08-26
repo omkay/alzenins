@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Cairo, Plus_Jakarta_Sans } from "next/font/google";
 import { routing, localeDirection, type Locale } from "@/i18n/routing";
+import { AuthProvider } from "@/components/site/auth-provider";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import "../globals.css";
@@ -71,9 +72,11 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>
-          <SiteHeader />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <AuthProvider>
+            <SiteHeader />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

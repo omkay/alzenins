@@ -12,13 +12,19 @@ empty dashboard, in Arabic, on a phone.
 ### Progress
 
 Done: repo + tooling (Next 16 / React 19 / Tailwind v4 / TS strict), brand tokens,
-`Button` primitive, next-intl ar/en routing with RTL, header/footer/locale switcher,
-Arabic home page, legacy 301s, Drizzle identity schema + migration + idempotent seed,
-Docker Postgres, `db:*` scripts. Lint, typecheck and build are clean.
+`Button`/`Input` primitives, next-intl ar/en routing with RTL, header/footer/locale
+switcher, Arabic home page, legacy 301s, Drizzle identity schema + migration +
+idempotent seed, Docker Postgres, `db:*` scripts, **Auth.js with email OTP + optional
+Google, `requireUser()`/`requireRole()` guards, proxy route protection, two-step
+sign-in, profile page with a server action, `/admin` guard placeholder**.
 
-Remaining: Auth.js (email OTP + Google), `requireRole()` guards, profile page, empty
-dashboard, remaining marketing pages, the other ~16 primitives, RTL snapshots, CI,
-Storybook or kitchen-sink route, Sentry + PostHog, staging environment.
+Acceptance criteria met so far: registration and sign-in land on the dashboard;
+locale switching flips the whole UI; an admin-only route refuses a student
+server-side; the database rebuilds from migrations + seed in one command.
+
+Remaining: remaining marketing pages, the other ~16 primitives, RTL snapshots, CI,
+rate limiting on auth, Storybook or kitchen-sink route, Sentry + PostHog, staging,
+Lighthouse ≥ 90 verification, old-URL redirect verification.
 
 ## In scope
 

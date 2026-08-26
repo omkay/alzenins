@@ -36,7 +36,11 @@ export const users = pgTable(
   {
     id: id(),
     email: text().notNull(),
-    emailVerifiedAt: timestamp({ withTimezone: true }),
+    /**
+     * The property name is dictated by @auth/drizzle-adapter, which looks for
+     * `emailVerified`. The column keeps our own naming.
+     */
+    emailVerified: timestamp("email_verified_at", { withTimezone: true }),
     name: text(),
     image: text(),
     locale: appLocale().notNull().default("ar"),
@@ -67,13 +71,16 @@ export const accounts = pgTable(
     type: text().notNull(),
     provider: text().notNull(),
     providerAccountId: text().notNull(),
-    refreshToken: text(),
-    accessToken: text(),
-    expiresAt: integer(),
-    tokenType: text(),
+    // These six are snake_case at the property level because
+    // @auth/drizzle-adapter matches on property names, not column names. The
+    // columns they map to are unchanged.
+    refresh_token: text(),
+    access_token: text(),
+    expires_at: integer(),
+    token_type: text(),
     scope: text(),
-    idToken: text(),
-    sessionState: text(),
+    id_token: text(),
+    session_state: text(),
   },
   (t) => [
     primaryKey({ columns: [t.provider, t.providerAccountId] }),

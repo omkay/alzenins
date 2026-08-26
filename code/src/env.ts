@@ -3,17 +3,39 @@ import { z } from "zod";
 /**
  * Fail at boot, not at the first request. Every environment variable the app
  * relies on is declared here; nothing reads `process.env` directly elsewhere.
+ *
+ * Each value is read by a literal `process.env.X` access on purpose — Next only
+ * inlines those, so passing the whole `process.env` object would come back empty
+ * in the edge runtime.
  */
 const schema = z.object({
-  NODE_ENV: z
-    .enum(["development", "test", "production"])
-    .default("development"),
-  DATABASE_URL: z.string().url(),
-  APP_URL: z.string().url().default("http://localhost:3000"),
+  NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  DATABASE_URL: z.url(),
+  APP_URL: z.url().default("http://localhost:3000"),
+
+  /** Signs session tokens. Generate with `openssl rand -base64 32`. */
+  AUTH_SECRET: z.string().min(32),
+
+  /** Google sign-in is optional locally; omit both and the button disappears. */
+  AUTH_GOOGLE_ID: z.string().optional(),
+  AUTH_GOOGLE_SECRET: z.string().optional(),
+
+  /** Without a key, sign-in codes are printed to the server console in dev. */
+  RESEND_API_KEY: z.string().optional(),
+  EMAIL_FROM: z.string().default("Alzenins <noreply@alzenins.com>"),
 });
 
 function load() {
-  const parsed = schema.safeParse(process.env);
+  const parsed = schema.safeParse({
+    NODE_ENV: process.env.NODE_ENV,
+    DATABASE_URL: process.env.DATABASE_URL,
+    APP_URL: process.env.APP_URL,
+    AUTH_SECRET: process.env.AUTH_SECRET,
+    AUTH_GOOGLE_ID: process.env.AUTH_GOOGLE_ID,
+    AUTH_GOOGLE_SECRET: process.env.AUTH_GOOGLE_SECRET,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    EMAIL_FROM: process.env.EMAIL_FROM,
+  });
 
   if (!parsed.success) {
     const issues = parsed.error.issues
@@ -26,3 +48,7 @@ function load() {
 }
 
 export const env = load();
+
+export const hasGoogleAuth = Boolean(
+  env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET,
+);

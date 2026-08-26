@@ -75,7 +75,7 @@ async function main() {
 
     const [row] = await db
       .insert(users)
-      .values({ ...user, emailVerifiedAt: new Date() })
+      .values({ ...user, emailVerified: new Date() })
       .onConflictDoUpdate({
         target: users.email,
         set: { name: user.name, role: user.role, updatedAt: new Date() },

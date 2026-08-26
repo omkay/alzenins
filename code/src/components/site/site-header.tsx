@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Button } from "@/components/ui/button";
 import { LocaleSwitcher } from "./locale-switcher";
+import { UserMenu } from "./user-menu";
 import { BrandMark } from "./brand-mark";
 
 const links = [
@@ -41,9 +41,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <LocaleSwitcher />
-          <Link href="/sign-in">
-            <Button size="sm">{t("signIn")}</Button>
-          </Link>
+          <UserMenu />
         </div>
       </div>
     </header>
