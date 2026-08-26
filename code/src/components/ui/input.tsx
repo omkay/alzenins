@@ -31,7 +31,14 @@ export function Label({
 }
 
 export function FieldError({ children }: { children?: React.ReactNode }) {
-  if (!children) return null;
+  // Callers often pass `{cond && t("x")}` expressions, which arrive as an array
+  // containing `false`. That is truthy, so a naive check leaves an empty
+  // role="alert" in the DOM for screen readers to announce.
+  // React.Children.toArray already drops null, undefined and booleans.
+  const hasContent = React.Children.toArray(children).some(
+    (child) => child !== "",
+  );
+  if (!hasContent) return null;
   return (
     <p role="alert" className="mt-2 text-sm font-semibold text-danger">
       {children}

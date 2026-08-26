@@ -4,3 +4,4 @@
  * See docs/data-model.md.
  */
 export * from "./identity";
+export * from "./ops";

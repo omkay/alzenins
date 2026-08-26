@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Matches docker-compose.yml so local and CI behave identically.
+  DATABASE_URL: postgresql://alzenins:alzenins@localhost:5432/alzenins
+  APP_URL: http://localhost:3000
+  AUTH_SECRET: ci-only-secret-not-used-anywhere-real-000000
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: alzenins
+          POSTGRES_PASSWORD: alzenins
+          POSTGRES_DB: alzenins
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U alzenins -d alzenins"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    defaults:
+      run:
+        working-directory: code
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: code/pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Apply migrations
+        run: pnpm db:migrate
+
+      - name: Check for un-generated schema changes
+        # A schema edit without a matching migration is the classic way to break
+        # a deploy. drizzle-kit prints "No schema changes" when they are in sync.
+        run: |
+          output=$(pnpm exec drizzle-kit generate --name ci_drift_check 2>&1)
+          echo "$output"
+          if ! echo "$output" | grep -q "No schema changes"; then
+            echo "::error::Schema differs from the committed migrations. Run 'pnpm db:generate' and commit the result."
+            exit 1
+          fi
+
+      - name: Seed
+        run: pnpm db:seed
+
+      - name: Build
+        run: pnpm build

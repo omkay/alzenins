@@ -31,12 +31,27 @@
   },
   "courses": {
     "title": "Courses",
-    "subtitle": "Pick the track that fits your level and your schedule.",
+    "subtitle": "Four tracks, all live with a teacher — pick the one that fits your level and your week.",
     "perMonth": "per month",
     "seatsLeft": "{count} of {total} seats left",
     "soldOut": "Fully booked",
     "joinWaitlist": "Join the waitlist",
-    "enrol": "Reserve your seat"
+    "enrol": "Reserve your seat",
+    "onRequest": "on request",
+    "askAbout": "Ask about this course",
+    "note": "Self-serve enrolment and online payment are in development — message us to reserve a place.",
+    "diplomaTitle": "Japanese Diploma",
+    "diplomaDesc": "A full year taking you from zero to JLPT N3, taught through anime and games rather than memorisation.",
+    "diplomaMeta": "Monday and Wednesday · 18:00 Dubai · one hour per class",
+    "jlptTitle": "JLPT Preparation",
+    "jlptDesc": "Intensive drilling on the official exam format from N5 to N3, with full mock papers.",
+    "jlptMeta": "Intensive track · several time slots",
+    "femaleTitle": "Female-only cohort",
+    "femaleDesc": "The same diploma curriculum in an all-female group, taught by a female instructor.",
+    "femaleMeta": "Annual subscription · closed group",
+    "privateTitle": "Private tutoring",
+    "privateDesc": "One-to-one sessions built around your goal and your pace, with a teacher or a native speaker.",
+    "privateMeta": "Flexible times · one-to-one"
   },
   "store": {
     "title": "Store",
@@ -45,11 +60,32 @@
   },
   "about": {
     "title": "About us",
-    "subtitle": "Alzenins Language Centre — from the UAE to the Arab world."
+    "subtitle": "Alzenins Language Centre — founded in 2020 as Arab Quoshi.",
+    "journeyTitle": "Our journey",
+    "journeyBody": "Since 2020 we have been building courses and learning experiences that help people develop real skills and actually use them.",
+    "philosophyTitle": "Our philosophy",
+    "philosophyBody": "We believe learning should be flexible, contemporary and grounded in reality. Our programmes combine simplicity, quality and genuine interaction.",
+    "pathTitle": "Our path",
+    "pathBody": "We have produced varied training content and shared what we know through meetups, podcasts and digital material.",
+    "visionTitle": "Our vision",
+    "visionBody": "We are aiming past the traditional course — towards a space for learning, inspiration and exchanging experience.",
+    "closing": "Our journey continues… and the best hasn't started yet."
   },
   "contact": {
     "title": "Contact us",
-    "subtitle": "Questions about courses, schedules or pricing — we reply within one working day."
+    "subtitle": "Questions about courses, schedules or pricing — we reply within one working day.",
+    "name": "Name",
+    "channel": "Email or WhatsApp",
+    "message": "Your message",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sent": "Got it — we'll be in touch shortly.",
+    "error": "Couldn't send that. Try again in a moment.",
+    "rateLimited": "That's a lot of messages. Give it a minute and try again.",
+    "directTitle": "Or reach us directly",
+    "email": "Email",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram"
   },
   "auth": {
     "title": "Sign in",

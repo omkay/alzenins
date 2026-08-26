@@ -8,6 +8,20 @@
       "when": 1787714824453,
       "tag": "0000_init_identity",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1787716890743,
+      "tag": "0001_rate_limit",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787717573447,
+      "tag": "0002_contact_messages",
+      "breakpoints": true
     }
   ]
 }
