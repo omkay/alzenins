@@ -102,6 +102,7 @@ name where they land, and move on. What's forbidden is silent slippage.
 | 6 | VAT | UAE standard 5%, tax-inclusive, **provisional** pending the accountant. → [ADR-0007](decisions/ADR-0007-vat-treatment.md) |
 | 8 | Store: physical or digital | **Digital only.** No shipping, stock, or returns — Phase 7 roughly halves. |
 | 1 | Existing codebase | Fresh app, marketing pages rebuilt. Done in Phase 1. |
+| — | Price anchor | **390 AED = 399 SAR** (both ≈ $106), FX parity with a "9" ending. Sheet in [`price-book.json`](price-book.json); 14 of 16 markets still need the owner's numbers. |
 
 **Still open:**
 

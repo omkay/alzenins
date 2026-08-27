@@ -44,7 +44,11 @@ Any application code. Resist it.
 ## Tasks
 
 - [x] ~~Owner answers the ten open questions~~ — **four answered**, six outstanding
-- [ ] Write the product & price sheet: every SKU × every currency × every interval
+- [~] Write the product & price sheet: every SKU × every currency × every interval —
+      **structure done**, exported to [`docs/price-book.json`](../price-book.json).
+      Only UAE (390 AED) and Saudi (399 SAR) are the owner's own numbers; the other 14
+      markets still carry engineering's suggestions and need the owner's review.
+      Editable sheet: <https://claude.ai/code/artifact/93ab9dbe-e4e7-44a9-9c00-beb35c9ff80f>
 - [x] Confirm MamoPay account verification and sandbox API key
 - [x] Decide Stripe-fallback vs USD-fallback for uncovered currencies → ADR-0003 **Accepted**
 - [ ] Confirm Zoom plan supports Server-to-Server OAuth
