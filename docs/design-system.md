@@ -23,7 +23,8 @@ language into product surfaces; it does not rebrand.
 | `--muted-foreground` | `#52627f` | Secondary text |
 | `--border` | `#d9d0c2` | Warm hairline |
 | `--input` | `#f0e9df` | Field fill |
-| `--ring` | `#a96f2d` | Focus ring — darker gold, meets contrast on cream |
+| `--ring` | `#a96f2d` | Focus ring — non-text, so the 3:1 UI-component threshold applies and it passes |
+| `--accent-text` | `#7a4f1c` | **The only gold permitted for text.** See the correction below |
 | `--radius` | `1rem` | Generous, soft corners throughout |
 
 Supporting hues found in use: `#c8965a` / `#e8b87a` / `#f0cb8a` (gold ramp),
@@ -107,8 +108,14 @@ Respect `prefers-reduced-motion` — kill the gradient drift and the live pulse.
 ## 6. Accessibility floor
 
 - WCAG 2.1 AA. Gold `#d8a25d` on cream `#faf7f1` is **~1.9:1** — it is a *decoration and
-  fill* colour, never small text on cream. For gold text use `#a96f2d` (the ring colour).
-  Gold-filled buttons take navy `#1b2a4a` text, not white.
+  fill* colour, never small text. Gold-filled buttons take navy `#1b2a4a` text, not white.
+- **Correction (2026-08-27, measured with Lighthouse).** An earlier version of this document
+  said to use `#a96f2d` — the ring colour — for gold text. That was wrong, and it shipped:
+  Lighthouse caught the home page's eyebrow badge at **3.32:1**. Measured properly,
+  `#a96f2d` is **3.93:1 on cream** and **4.14:1 on card** — it fails AA for body text on
+  every surface we have. The token `--accent-text` is now **`#7a4f1c`** (6.63:1 on cream).
+  Do not reintroduce `#a96f2d` as a text colour; it remains correct for the focus ring,
+  where the 3:1 UI-component threshold applies.
 - Visible focus ring (`--ring`) on every interactive element; never `outline: none`.
 - Full keyboard operation on the booking calendar and the video player.
 - Every form field has a real `<label>`; errors are announced, not just coloured.

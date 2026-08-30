@@ -31,7 +31,7 @@ function Home() {
         />
 
         <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-          <span className="inline-flex rounded-full bg-accent-text/15 px-3.5 py-1.5 text-xs font-extrabold text-accent-text">
+          <span className="inline-flex rounded-full bg-accent-subtle px-3.5 py-1.5 text-xs font-extrabold text-accent-text">
             {t("eyebrow")}
           </span>
 

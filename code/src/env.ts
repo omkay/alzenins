@@ -27,6 +27,12 @@ const schema = z.object({
   /** Mamo Business API. Optional until Phase 2 wires up checkout. */
   MAMOPAY_API_KEY: z.string().optional(),
   MAMOPAY_ENV: z.enum(["sandbox", "production"]).default("sandbox"),
+
+  /** Observability. All optional — absent keys disable the integration. */
+  NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
+  SENTRY_ENVIRONMENT: z.string().default("development"),
+  NEXT_PUBLIC_POSTHOG_KEY: z.string().optional(),
+  NEXT_PUBLIC_POSTHOG_HOST: z.url().default("https://eu.i.posthog.com"),
 });
 
 function load() {
@@ -41,6 +47,10 @@ function load() {
     EMAIL_FROM: process.env.EMAIL_FROM,
     MAMOPAY_API_KEY: process.env.MAMOPAY_API_KEY,
     MAMOPAY_ENV: process.env.MAMOPAY_ENV,
+    NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    SENTRY_ENVIRONMENT: process.env.SENTRY_ENVIRONMENT,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   });
 
   if (!parsed.success) {
@@ -58,6 +68,9 @@ export const env = load();
 export const hasGoogleAuth = Boolean(
   env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET,
 );
+
+export const hasSentry = Boolean(env.NEXT_PUBLIC_SENTRY_DSN);
+export const hasPostHog = Boolean(env.NEXT_PUBLIC_POSTHOG_KEY);
 
 export const MAMOPAY_BASE_URL =
   env.MAMOPAY_ENV === "production"

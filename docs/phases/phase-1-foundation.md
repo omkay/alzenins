@@ -22,9 +22,17 @@ Acceptance criteria met so far: registration and sign-in land on the dashboard;
 locale switching flips the whole UI; an admin-only route refuses a student
 server-side; the database rebuilds from migrations + seed in one command.
 
-Remaining: remaining marketing pages, the other ~16 primitives, RTL snapshots, CI,
-rate limiting on auth, Storybook or kitchen-sink route, Sentry + PostHog, staging,
-Lighthouse ≥ 90 verification, old-URL redirect verification.
+Also done: marketing pages, 20 UI primitives on Radix, `/dev/kitchen-sink` gallery,
+27 Playwright E2E tests (auth, contact, i18n, redirects, 14 RTL checks), Sentry and
+PostHog (both inert without keys), Lighthouse measured and asserted in CI.
+
+**Acceptance criteria: 7 of 8 met.** Lighthouse is 93/100/100/91 on `/ar` and `/en`,
+redirects are covered by E2E, and RTL has behavioural cover in CI.
+
+**Remaining: staging, preview and production environments.** These need accounts and
+credentials only the owner can create — see [`deployment.md`](../deployment.md).
+Phase 1 cannot be signed off until staging exists, because the sign-off ritual is a
+live demo on staging.
 
 ## In scope
 

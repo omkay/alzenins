@@ -95,3 +95,13 @@ jobs:
           name: playwright-report
           path: code/playwright-report/
           retention-days: 7
+
+      - name: Lighthouse
+        # Accessibility is asserted at 100, not 90. It was 96 once and the cause
+        # was a real AA contrast failure on the home page — see the correction in
+        # docs/design-system.md §6. A 90 floor would have hidden it.
+        run: |
+          pnpm add -g @lhci/cli@0.15.x
+          lhci autorun --config=lighthouserc.json
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

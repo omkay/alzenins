@@ -4,6 +4,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Cairo, Plus_Jakarta_Sans } from "next/font/google";
 import { routing, localeDirection, type Locale } from "@/i18n/routing";
+import { env } from "@/env";
+import { Suspense } from "react";
+import { Analytics } from "@/components/site/analytics";
 import { AuthProvider } from "@/components/site/auth-provider";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
@@ -37,6 +40,9 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
 
   return {
+    // hreflang alternates must be fully qualified — Lighthouse fails the audit
+    // on relative hrefs, and search engines ignore them.
+    metadataBase: new URL(env.APP_URL),
     title: { default: t("homeTitle"), template: `%s — ${t("siteName")}` },
     description: t("homeDescription"),
     openGraph: {
@@ -46,7 +52,13 @@ export async function generateMetadata({
       type: "website",
     },
     alternates: {
-      languages: { ar: "/ar", en: "/en" },
+      canonical: `/${locale}`,
+      languages: {
+        ar: "/ar",
+        en: "/en",
+        // Tells search engines what to serve when no language matches.
+        "x-default": "/ar",
+      },
     },
   };
 }
@@ -73,6 +85,11 @@ export default async function LocaleLayout({
       <body className="flex min-h-dvh flex-col">
         <NextIntlClientProvider>
           <AuthProvider>
+            {/* useSearchParams needs a boundary or the whole tree opts out of
+                static rendering. */}
+            <Suspense fallback={null}>
+              <Analytics />
+            </Suspense>
             <SiteHeader />
             <main className="flex-1">{children}</main>
             <SiteFooter />
