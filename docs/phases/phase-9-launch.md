@@ -32,6 +32,9 @@
 - Dry-run the migration on staging twice, with a verified rollback
 
 ### Cutover
+- **Verify `alzenins.com` in Resend** (DKIM + SPF) and move `EMAIL_FROM` off the shared
+  `onboarding@resend.dev` sender, which can only deliver to the account owner. Unverified
+  mail carrying a one-time code is exactly what spam filters bury.
 - SEO: 301 map for every indexed URL, sitemap, hreflang for `ar`/`en`, structured data
 - Analytics and conversion tracking verified end to end before, not after
 - Monitoring: uptime, error budget, payment-failure alerting, webhook-lag alerting

@@ -61,11 +61,32 @@ gcloud run deploy alzenins-staging --region=me-central1 \
 hreflang alternates are resolved at build time for the statically rendered pages. Changing
 the hostname means rebuilding, not just redeploying.
 
-### Outstanding
+### Email — the sender is a temporary arrangement
 
-**`DATABASE_URL` is a placeholder.** Anything that touches the database — sign-in, profile,
-the contact form — returns 500 until a real Neon connection string is stored. Static pages,
-the locale proxy, the route guards and the legacy redirects all work already.
+Staging sends through Resend's **shared `onboarding@resend.dev` sender**, because
+`alzenins.com` is not yet verified in Resend. That sender has a hard limit:
+
+> **It can only deliver to the Resend account owner's own address.** Any other
+> recipient is rejected with a 403.
+
+So on staging today, sign-in works for the account owner and **fails for everyone
+else** — including the instructors, if they are asked to try it.
+
+**Verifying `alzenins.com` in Resend is required before launch**, and worth doing sooner if
+anyone besides the owner needs to sign in to staging:
+
+1. resend.com/domains → add `alzenins.com`
+2. Create the DKIM and SPF records it gives you
+3. Then set the sender back:
+
+```bash
+gcloud run services update alzenins-staging --region=me-central1 \
+  --project=alzenins-staging \
+  --update-env-vars="^|^EMAIL_FROM=Alzenins <noreply@alzenins.com>"
+```
+
+Domain verification also materially improves deliverability — unauthenticated mail carrying
+a one-time code is exactly what spam filters bury. This belongs in the Phase 9 checklist.
 
 ## Environment variables
 
