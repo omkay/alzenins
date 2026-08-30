@@ -5,21 +5,48 @@
 | Environment | State | Notes |
 | --- | --- | --- |
 | `local` | ✅ Working | Docker Postgres on 5433, `pnpm dev` |
-| `preview` | ⛔ Not set up | Needs a hosting account — see below |
-| `staging` | ⛔ Not set up | Blocks the Phase 1 sign-off demo |
+| `preview` | ⛔ Not set up | Per-PR deploys, deferred |
+| `staging` | 🟡 **Deployed, needs a database** | <https://alzenins-staging-467926779679.me-central1.run.app> |
 | `production` | ⛔ Not set up | |
 
-**Preview, staging and production cannot be created from this repo alone** — they need
-accounts and credentials only the owner can create. Everything the app needs is listed
-below so it is a form-filling exercise rather than a discovery one.
+## Staging — GCP Cloud Run
 
-## What staging needs
+| Item | Value |
+| --- | --- |
+| Project | `alzenins-staging` (project number `467926779679`) |
+| Region | `me-central1` (Doha) — closest to the UAE/GCC audience, ~10–30ms from the Gulf |
+| Service | `alzenins-staging`, Cloud Run, 1 vCPU / 512Mi, min 0 / max 3 instances |
+| Image | `me-central1-docker.pkg.dev/alzenins-staging/app/alzenins-staging` |
+| Database | Neon (external) — ADR-0002 treats the Postgres host as operational, not architectural |
+| Secrets | Secret Manager: `AUTH_SECRET`, `DATABASE_URL` |
 
-1. **A host.** Vercel is the assumed target (the app is Next.js and the plan says so), but
-   nothing here is Vercel-specific — `trustHost` is set explicitly precisely so a container
-   on any host works. Root directory must be set to **`code/`**.
-2. **A Postgres database.** Neon or Supabase; a separate branch/instance from production.
-3. **Environment variables** — the full set is in [`code/.env.example`](../code/.env.example):
+Scale-to-zero means staging costs essentially nothing when idle, at the price of a cold
+start on the first request.
+
+### Rebuild and redeploy
+
+```bash
+cd code
+gcloud builds submit --config=cloudbuild.yaml --region=me-central1 \
+  --substitutions=_APP_URL=https://alzenins-staging-467926779679.me-central1.run.app,SHORT_SHA=$(git rev-parse --short HEAD)
+
+gcloud run deploy alzenins-staging --region=me-central1 \
+  --image=me-central1-docker.pkg.dev/alzenins-staging/app/alzenins-staging:latest
+```
+
+`APP_URL` is a **build argument, not just a runtime variable**: `metadataBase` and the
+hreflang alternates are resolved at build time for the statically rendered pages. Changing
+the hostname means rebuilding, not just redeploying.
+
+### Outstanding
+
+**`DATABASE_URL` is a placeholder.** Anything that touches the database — sign-in, profile,
+the contact form — returns 500 until a real Neon connection string is stored. Static pages,
+the locale proxy, the route guards and the legacy redirects all work already.
+
+## Environment variables
+
+The full set is in [`code/.env.example`](../code/.env.example):
 
 | Variable | Required | Notes |
 | --- | --- | --- |
@@ -36,8 +63,11 @@ below so it is a form-filling exercise rather than a discovery one.
 | `NEXT_PUBLIC_POSTHOG_KEY` | Recommended | Absent disables analytics entirely |
 | `NEXT_PUBLIC_POSTHOG_HOST` | Optional | Defaults to the EU host |
 
-4. **Migrations on deploy.** Run `pnpm db:migrate` before the new build takes traffic.
-   Migrations are forward-only.
+## Migrations
+
+Run `pnpm db:migrate` against the target database **before** the new revision takes
+traffic. Migrations are forward-only. The runtime image deliberately ships without
+drizzle-kit, so this runs from a developer machine or a CI step, not from the container.
 
 ## Guards that key on `APP_URL`
 
@@ -50,9 +80,22 @@ Two things are enabled only when `APP_URL` starts with `http://localhost`:
 **Setting `APP_URL` to a localhost value on a deployed environment would expose both** —
 it is the one variable to get right.
 
-## Verified locally, not yet in an environment
+## Verified on staging
 
-Lighthouse on the production build, Chrome headless:
+| Check | Result |
+| --- | --- |
+| `/` → `/ar` | 307 ✅ |
+| `/ar`, `/en`, `/ar/courses`, `/ar/about` | 200 ✅ |
+| `/courses` → `/ar/courses` | 308 ✅ legacy redirect |
+| `/ar/dashboard` signed out | 302 → sign-in with callback ✅ |
+| `/ar/dev/kitchen-sink` | **404** ✅ the localhost guard holds on a real host |
+| `/api/auth/csrf` | returns a token ✅ confirms the `trustHost` fix |
+| Arabic renders with `dir="rtl"`, absolute hreflang | ✅ |
+| Anything database-backed | ❌ 500 until `DATABASE_URL` is real |
+
+## Lighthouse, measured locally on the production build
+
+Chrome headless:
 
 | Page | Performance | Accessibility | Best practices | SEO |
 | --- | --- | --- | --- | --- |

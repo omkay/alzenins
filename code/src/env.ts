@@ -35,8 +35,23 @@ const schema = z.object({
   NEXT_PUBLIC_POSTHOG_HOST: z.url().default("https://eu.i.posthog.com"),
 });
 
+/**
+ * Treat an empty string as absent.
+ *
+ * Docker build args, CI matrices and Cloud Run all set variables to "" when
+ * they have no value. An empty string is *present* as far as Zod is concerned,
+ * so `.default()` never fires and `.url()` fails on it — which is exactly how
+ * the first staging image build broke.
+ */
+function blankToUndefined<T extends Record<string, string | undefined>>(raw: T) {
+  return Object.fromEntries(
+    Object.entries(raw).map(([k, v]) => [k, v === "" ? undefined : v]),
+  );
+}
+
 function load() {
-  const parsed = schema.safeParse({
+  const parsed = schema.safeParse(
+    blankToUndefined({
     NODE_ENV: process.env.NODE_ENV,
     DATABASE_URL: process.env.DATABASE_URL,
     APP_URL: process.env.APP_URL,
@@ -51,7 +66,8 @@ function load() {
     SENTRY_ENVIRONMENT: process.env.SENTRY_ENVIRONMENT,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  });
+    }),
+  );
 
   if (!parsed.success) {
     const issues = parsed.error.issues
