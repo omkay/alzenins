@@ -26,13 +26,12 @@ Also done: marketing pages, 20 UI primitives on Radix, `/dev/kitchen-sink` galle
 27 Playwright E2E tests (auth, contact, i18n, redirects, 14 RTL checks), Sentry and
 PostHog (both inert without keys), Lighthouse measured and asserted in CI.
 
-**Acceptance criteria: 7 of 8 met.** Lighthouse is 93/100/100/91 on `/ar` and `/en`,
-redirects are covered by E2E, and RTL has behavioural cover in CI.
+**Staging is live** on Cloud Run with Neon and Resend behind it, and 23 automated checks
+pass against it. All eight acceptance criteria are now demonstrable on a real environment.
 
-**Remaining: staging, preview and production environments.** These need accounts and
-credentials only the owner can create — see [`deployment.md`](../deployment.md).
-Phase 1 cannot be signed off until staging exists, because the sign-off ritual is a
-live demo on staging.
+**Remaining: the sign-off walkthrough itself** — see
+[`phase-1-signoff.md`](phase-1-signoff.md). Preview and production environments are
+deliberately deferred; they are not Phase 1 criteria.
 
 ## In scope
 
