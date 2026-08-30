@@ -1,10 +1,11 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { LogOut } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { signOutAction } from "@/server/auth/actions";
 
 /**
  * Read client-side on purpose. Reading the session in the server layout would
@@ -41,15 +42,17 @@ export function UserMenu() {
           {label.slice(0, 1).toUpperCase()}
         </span>
       </Link>
-      <Button
-        variant="ghost"
-        size="icon"
-        aria-label={tAuth("signOut")}
-        title={tAuth("signOut")}
-        onClick={() => signOut({ callbackUrl: "/" })}
-      >
-        <LogOut aria-hidden />
-      </Button>
+      <form action={signOutAction}>
+        <Button
+          type="submit"
+          variant="ghost"
+          size="icon"
+          aria-label={tAuth("signOut")}
+          title={tAuth("signOut")}
+        >
+          <LogOut aria-hidden />
+        </Button>
+      </form>
     </div>
   );
 }

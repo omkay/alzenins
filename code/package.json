@@ -16,7 +16,9 @@
     "db:seed": "tsx src/server/db/seed.ts",
     "db:reset": "docker compose -f ../docker-compose.yml down -v && pnpm db:up && sleep 4 && pnpm db:migrate && pnpm db:seed",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.11.3",
@@ -35,6 +37,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

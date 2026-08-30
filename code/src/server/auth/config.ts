@@ -9,6 +9,11 @@ import { env, hasGoogleAuth } from "@/env";
  */
 export const authConfig = {
   secret: env.AUTH_SECRET,
+  // Auth.js refuses to infer the request host in production and returns
+  // UntrustedHost for every route. Vercel sets AUTH_TRUST_HOST implicitly;
+  // nothing else does — so a self-hosted or containerised deploy, and any
+  // production build run locally, breaks without this.
+  trustHost: true,
   // JWT rather than database sessions so the edge proxy can read a session
   // without a database round-trip. Privileged routes re-check the role against
   // the database server-side anyway — see ./guards.ts and ADR-0002.

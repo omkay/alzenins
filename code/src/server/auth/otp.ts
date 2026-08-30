@@ -1,3 +1,4 @@
+import { appendFile } from "node:fs/promises";
 import { env } from "@/env";
 
 /**
@@ -23,6 +24,24 @@ const templates = {
 
 export async function sendOtpEmail(to: string, code: string, locale: "ar" | "en" = "ar") {
   const { subject, text } = templates[locale](code);
+
+  // End-to-end tests need to read the code they were just sent, so this writes
+  // it to a file the harness watches and sends nothing.
+  //
+  // Two gates, because the tests run a PRODUCTION build (`next start`), which
+  // means NODE_ENV alone cannot distinguish a test run from a real deployment:
+  // the variable is only ever set by playwright.config.ts, and the app URL must
+  // be localhost. A real deployment satisfies neither.
+  const sink = process.env.E2E_OTP_SINK;
+  if (sink) {
+    if (!env.APP_URL.startsWith("http://localhost")) {
+      throw new Error(
+        "E2E_OTP_SINK is only permitted when APP_URL is localhost",
+      );
+    }
+    await appendFile(sink, JSON.stringify({ to, code }) + "\n", "utf8");
+    return;
+  }
 
   if (!env.RESEND_API_KEY) {
     // Dev fallback. Never reached in production — the env check below throws.
