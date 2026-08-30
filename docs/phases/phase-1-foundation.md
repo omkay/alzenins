@@ -86,6 +86,10 @@ Products, prices, payments, classes, bookings, video. All of it.
 
 ## Sign-off checklist
 
+**The walkthrough lives in [`phase-1-signoff.md`](phase-1-signoff.md)** — 23 automated
+checks against staging plus seven manual steps that cannot be automated against a real
+deployment.
+
 - [ ] All acceptance criteria demonstrated live on staging
 - [ ] Old-URL redirects verified for every existing indexed page
 - [ ] Secrets present in all four environments, none in the repo
