@@ -126,8 +126,9 @@ ledger, never a mutable counter.
 `provider_ref`, `settled_amount_minor`, `settled_currency`, `placed_at`.
 
 > **`display_currency` and `charge_currency` are separate columns**, per
-> [ADR-0003](decisions/ADR-0003-multi-currency-strategy.md). For eight of the sixteen
-> markets they differ, and reporting needs both. `tax_rate` and `tax_treatment` are stored
+> [ADR-0003](decisions/ADR-0003-multi-currency-strategy.md). For **nine** of the sixteen
+> markets they differ (Qatar joined the list after the sandbox spike found QAR is
+> rejected), and reporting needs both. `tax_rate` and `tax_treatment` are stored
 > per order rather than derived at report time, so historical orders stay correct after a
 > rate change ([ADR-0007](decisions/ADR-0007-vat-treatment.md)). No `shipping_minor` — the
 > store is digital only.

@@ -2,7 +2,7 @@
  * The markets we sell into, with the currency each one is *displayed* in.
  *
  * Display currency and charge currency are separate concepts: MamoPay cannot
- * charge in eight of these sixteen currencies. ADR-0003 settled how that gap is
+ * charge in nine of these sixteen currencies. ADR-0003 settled how that gap is
  * handled — Option A, MamoPay only, with a fallback charge currency.
  * See docs/decisions/ADR-0003-multi-currency-strategy.md.
  */
