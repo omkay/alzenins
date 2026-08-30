@@ -81,6 +81,19 @@ function load() {
 
 export const env = load();
 
+/**
+ * Auth.js builds absolute redirect URLs from AUTH_URL, and without it falls
+ * back to the container's bind address — staging was redirecting sign-in to
+ * https://0.0.0.0:8080, which no browser can reach.
+ *
+ * It reads this straight from the environment rather than from config, so we
+ * derive it from APP_URL here. Two variables that must always agree is a bug
+ * waiting to happen; one source of truth is not.
+ */
+if (!process.env.AUTH_URL) {
+  process.env.AUTH_URL = env.APP_URL;
+}
+
 export const hasGoogleAuth = Boolean(
   env.AUTH_GOOGLE_ID && env.AUTH_GOOGLE_SECRET,
 );

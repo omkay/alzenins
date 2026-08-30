@@ -17,8 +17,31 @@
 | Region | `me-central1` (Doha) — closest to the UAE/GCC audience, ~10–30ms from the Gulf |
 | Service | `alzenins-staging`, Cloud Run, 1 vCPU / 512Mi, min 0 / max 3 instances |
 | Image | `me-central1-docker.pkg.dev/alzenins-staging/app/alzenins-staging` |
-| Database | Neon (external) — ADR-0002 treats the Postgres host as operational, not architectural |
-| Secrets | Secret Manager: `AUTH_SECRET`, `DATABASE_URL` |
+| Database | Neon project `alzenins` (`dry-art-50774076`), org `org-muddy-recipe-61569948` |
+| Neon branch | **`staging`** (`br-cold-sky-ae8v7c71`), branched from `production` |
+| Secrets | Secret Manager: `AUTH_SECRET`, `DATABASE_URL` (the pooled staging connection) |
+
+### Neon branches
+
+| Branch | Used by |
+| --- | --- |
+| `production` | Reserved. Nothing points at it yet. |
+| `staging` | The Cloud Run service |
+| — | Local development stays on Docker Postgres, not Neon |
+
+Postgres is the **only** Neon service this app uses. Neon Auth, the Data API,
+Object Storage, Functions and the AI Gateway are all available on the project and
+all deliberately unused: authentication is Auth.js against our own `user` table
+([ADR-0002](decisions/ADR-0002-postgres-drizzle-authjs.md)), and nothing else has
+a requirement yet. There is no `neon.ts`, because there is nothing to declare.
+
+`neon link` writes the linked branch's `DATABASE_URL` into `code/.env`. Local
+tooling must not pick that up, so `drizzle.config.ts` and the seed load
+`.env.local` **before** `.env`, matching Next's own precedence. Without that,
+`pnpm db:migrate` would silently target Neon instead of Docker.
+
+Migrations run against the **direct** (unpooled) connection; the app uses the
+**pooled** one.
 
 Scale-to-zero means staging costs essentially nothing when idle, at the price of a cold
 start on the first request.
