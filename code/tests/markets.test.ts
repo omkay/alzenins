@@ -29,21 +29,31 @@ describe("markets", () => {
   });
 
   /**
-   * This is the ADR-0003 gap, pinned as a test. If MamoPay adds a currency, this
-   * fails and forces a deliberate decision rather than a silent behaviour change.
+   * The ADR-0003 gap, pinned. If Mamo's accepted currencies change, this fails
+   * and forces a deliberate decision rather than a silent behaviour change.
+   *
+   * Nine, not eight: the sandbox spike found QAR is rejected even though the
+   * published list includes it.
    */
-  it("flags exactly the eight markets MamoPay cannot charge", () => {
+  it("flags exactly the nine markets MamoPay cannot charge", () => {
     const uncovered = MARKETS.filter(
       (m) => !MAMOPAY_CURRENCIES.has(m.currency),
     ).map((m) => m.country);
 
     expect(uncovered.sort()).toEqual(
-      ["OM", "KW", "BH", "JO", "IQ", "PS", "MA", "JP"].sort(),
+      ["QA", "OM", "KW", "BH", "JO", "IQ", "PS", "MA", "JP"].sort(),
+    );
+  });
+
+  it("pins the exact currency list the sandbox accepts", () => {
+    expect([...MAMOPAY_CURRENCIES].sort()).toEqual(
+      ["AED", "AUD", "CAD", "CHF", "DZD", "EGP", "EUR", "GBP", "RON", "SAR", "TRY", "USD"],
     );
   });
 
   it("resolves fallback status per country", () => {
     expect(needsFallbackCurrency("SA")).toBe(false);
+    expect(needsFallbackCurrency("QA")).toBe(true);
     expect(needsFallbackCurrency("JP")).toBe(true);
     expect(needsFallbackCurrency(null)).toBe(false);
     expect(marketFor("AE")?.currency).toBe("AED");
@@ -69,6 +79,7 @@ describe("markets", () => {
     });
     // Dollar-pegged GCC currencies fall back to AED, not USD.
     expect(resolveCurrency("KW").charge).toBe("AED");
+    expect(resolveCurrency("QA").charge).toBe("AED");
     expect(resolveCurrency("MA").charge).toBe("EUR");
   });
 

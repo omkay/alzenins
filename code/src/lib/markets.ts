@@ -2,7 +2,7 @@
  * The markets we sell into, with the currency each one is *displayed* in.
  *
  * Display currency and charge currency are separate concepts: MamoPay cannot
- * charge in eight of these sixteen currencies. ADR-0003 settled how that gap is
+ * charge in nine of these sixteen currencies. ADR-0003 settled how that gap is
  * handled — Option A, MamoPay only, with a fallback charge currency.
  * See docs/decisions/ADR-0003-multi-currency-strategy.md.
  */
@@ -28,11 +28,22 @@ export const MARKETS = [
 export type Market = (typeof MARKETS)[number];
 export type CountryCode = Market["country"];
 
-/** Currencies MamoPay can charge in — verified against Mamo's published list. */
+/**
+ * Currencies MamoPay will actually accept.
+ *
+ * OBSERVED, not documented. Mamo's marketing pages claim 28 currencies; the
+ * sandbox API rejects anything outside this list of twelve with
+ * `VALIDATION_ERROR: Currency must be AED, EUR, GBP, RON, SAR, TRY, USD, AUD,
+ * CAD, CHF, DZD, EGP`. An earlier version of this file trusted the published
+ * figure and wrongly listed QAR — Qatar would have had a price that failed at
+ * checkout. See docs/spikes/mamopay-sandbox.md.
+ *
+ * Whether production accepts more than the sandbox is an open question with
+ * Mamo. Until that is answered in writing, this list is the safe one.
+ */
 export const MAMOPAY_CURRENCIES = new Set([
-  "AED", "AUD", "CAD", "CHF", "CNY", "DKK", "DZD", "EGP", "EUR", "GBP",
-  "HKD", "IDR", "INR", "NOK", "NZD", "PKR", "QAR", "RON", "SAR", "SEK",
-  "SGD", "THB", "TRY", "USD",
+  "AED", "AUD", "CAD", "CHF", "DZD", "EGP", "EUR", "GBP", "RON", "SAR",
+  "TRY", "USD",
 ]);
 
 /** Everything settles to a UAE account in AED (ADR-0003). */
@@ -46,6 +57,10 @@ export const SETTLEMENT_CURRENCY = "AED";
  * falls back to USD, which is universally understood.
  */
 const FALLBACK_BY_COUNTRY: Partial<Record<CountryCode, string>> = {
+  // Qatar moved here after the sandbox spike: QAR is not accepted, despite the
+  // published currency list saying otherwise. QAR and AED are both dollar-pegged,
+  // so the charged number stays stable.
+  QA: "AED",
   OM: "AED",
   KW: "AED",
   BH: "AED",

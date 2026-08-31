@@ -1,0 +1,13 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+e2e
+playwright-report
+test-results
+blob-report
+.e2e-otp.log
+drizzle/meta
+*.md

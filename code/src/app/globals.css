@@ -34,8 +34,22 @@
   --input: #f0e9df;
   --ring: #a96f2d;
 
-  /* Gold is a fill, never small text on cream (≈1.9:1). Use this for gold text. */
-  --accent-text: #a96f2d;
+  /*
+   * Gold is a fill, never small text on cream (≈1.9:1). This is the gold for
+   * text — and it has to be this dark: #a96f2d, the site's own ring colour,
+   * measures only 3.93:1 on cream and 4.14:1 on card, so it fails AA for body
+   * text everywhere. #7a4f1c gives 6.63:1 on cream. Measured, not eyeballed.
+   */
+  --accent-text: #7a4f1c;
+
+  /*
+   * OPAQUE gold tint for chips and badges. It must be opaque: the hero's
+   * decorative gradient bloom sits behind these, and a translucent tint let it
+   * bleed through — Lighthouse measured the effective background as #dec8ac and
+   * the chip failed AA at 4.37:1 despite the maths saying otherwise on cream.
+   * Text contrast cannot depend on what happens to be painted underneath.
+   */
+  --accent-subtle: #f3e6d3;
 
   /* Status — extends the brand, keeps the warmth. */
   --success: #2f6f5a;
@@ -67,6 +81,7 @@
   --color-accent-light: var(--accent-light);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent-text: var(--accent-text);
+  --color-accent-subtle: var(--accent-subtle);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);

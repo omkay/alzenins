@@ -22,9 +22,16 @@ Acceptance criteria met so far: registration and sign-in land on the dashboard;
 locale switching flips the whole UI; an admin-only route refuses a student
 server-side; the database rebuilds from migrations + seed in one command.
 
-Remaining: remaining marketing pages, the other ~16 primitives, RTL snapshots, CI,
-rate limiting on auth, Storybook or kitchen-sink route, Sentry + PostHog, staging,
-Lighthouse ≥ 90 verification, old-URL redirect verification.
+Also done: marketing pages, 20 UI primitives on Radix, `/dev/kitchen-sink` gallery,
+27 Playwright E2E tests (auth, contact, i18n, redirects, 14 RTL checks), Sentry and
+PostHog (both inert without keys), Lighthouse measured and asserted in CI.
+
+**Staging is live** on Cloud Run with Neon and Resend behind it, and 23 automated checks
+pass against it. All eight acceptance criteria are now demonstrable on a real environment.
+
+**Remaining: the sign-off walkthrough itself** — see
+[`phase-1-signoff.md`](phase-1-signoff.md). Preview and production environments are
+deliberately deferred; they are not Phase 1 criteria.
 
 ## In scope
 
@@ -77,6 +84,10 @@ Products, prices, payments, classes, bookings, video. All of it.
 - [ ] Every primitive component has an RTL snapshot in CI
 
 ## Sign-off checklist
+
+**The walkthrough lives in [`phase-1-signoff.md`](phase-1-signoff.md)** — 23 automated
+checks against staging plus seven manual steps that cannot be automated against a real
+deployment.
 
 - [ ] All acceptance criteria demonstrated live on staging
 - [ ] Old-URL redirects verified for every existing indexed page

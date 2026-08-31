@@ -6,6 +6,22 @@
 | Date | 2026-08-26 · accepted 2026-08-27 |
 | Deciders | Owner, engineering |
 
+> ### Correction, 2026-08-30 — measured, not read
+>
+> This ADR was written from Mamo's **published** currency list of 28. A sandbox
+> spike found the API accepts **twelve**: AED, EUR, GBP, RON, SAR, TRY, USD, AUD,
+> CAD, CHF, DZD, EGP. **QAR is not accepted**, though this document originally
+> counted Qatar as covered.
+>
+> The decision below is unchanged — Option A still holds, and holds more strongly.
+> What changes is the arithmetic: **nine** of sixteen markets need a fallback, not
+> eight, and **Qatar is charged in AED**. Had the spike not run before the adapter
+> was written, Qatar would have shipped with a price that failed at checkout.
+>
+> Whether twelve is a sandbox limit or the real one is an open question with Mamo
+> and must be answered in writing before the price books are authored.
+> See [`docs/spikes/mamopay-sandbox.md`](../spikes/mamopay-sandbox.md).
+
 ## Context
 
 We sell into 16 countries: UAE, Saudi Arabia, Qatar, Oman, Kuwait, Bahrain, Jordan, Iraq,
@@ -77,6 +93,7 @@ revenue justifies a second processor's operational overhead.
 
 | Market | Display | Charged in | Why |
 | --- | --- | --- | --- |
+| **Qatar** | **QAR** | **AED** | **Added 2026-08-30 after the sandbox spike — QAR is rejected. Both are dollar-pegged** |
 | Oman, Kuwait, Bahrain, Jordan | OMR / KWD / BHD / JOD | **AED** | Dollar-pegged; AED keeps the number stable and the FX cost low |
 | Iraq, Palestine | IQD / ILS | **USD** | No peg; USD is the widely understood alternative |
 | Morocco | MAD | **EUR** | Closest major trading currency |

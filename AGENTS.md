@@ -101,9 +101,9 @@ Record what you learned in the journal so the next agent doesn't repeat the look
 
 | Field | Value |
 | --- | --- |
-| Active phase | **Phase 1 — Foundation** (in progress) |
+| Active phase | **Phase 1 awaiting sign-off** ([walkthrough](docs/phases/phase-1-signoff.md)) · **Phase 2 starting** |
 | Phase 0 | Partially answered 2026-08-27 — currency fallback (ADR-0003 Option A), MamoPay sandbox key, VAT (ADR-0007), digital-only store. **Phase 2 is unblocked.** Six questions remain, gating Phases 3, 7 and 9. |
-| Repo state | `code/` holds a running Next.js 16 app: brand design system, ar/en RTL routing, Auth.js with email OTP and role guards, rate limiting, profiles, five marketing pages, Drizzle + Postgres, seed, CI. |
+| Repo state | Next.js 16 app in `code/`, **deployed to staging** on Cloud Run + Neon + Resend. Design system, ar/en RTL, Auth.js email OTP with role guards, rate limiting, profiles, marketing pages, 20 primitives, 27 local E2E + 23 staging checks, Sentry/PostHog, CI with Lighthouse. |
 | Blocking decisions | See [open questions](docs/roadmap.md#open-questions) — six still open, none blocking Phase 2 |
 
 Update this table whenever the active phase changes.
@@ -119,4 +119,7 @@ pnpm dev                      # http://localhost:3000/ar
 ```
 
 `pnpm db:reset` wipes and rebuilds the database from migrations + seed.
-Before opening a PR: `pnpm lint && pnpm typecheck && pnpm build`.
+Before opening a PR: `pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
+
+Staging: <https://alzenins-staging-467926779679.me-central1.run.app> —
+`pnpm test:e2e:staging` runs 23 checks against it. See [`docs/deployment.md`](docs/deployment.md).
