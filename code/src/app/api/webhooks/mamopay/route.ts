@@ -31,30 +31,25 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 /**
- * Headers worth reading back. Everything else on a webhook delivery is transport
- * noise, and an allowlist keeps us from logging a cookie or an auth header if
- * one ever shows up.
+ * Headers safe to log with their values. Deliberately narrow: Mamo authenticates
+ * a delivery with an `auth_header` shared secret, so anything not on this list
+ * gets its name logged and its value withheld.
  */
-const INTERESTING = [
-  "content-type",
-  "user-agent",
-  "x-mamo-signature",
-  "x-mamopay-signature",
-  "x-signature",
-  "mamo-signature",
-  "x-request-id",
-  "x-webhook-id",
-  "x-idempotency-key",
-];
+const INTERESTING = ["content-type", "user-agent", "x-request-id"];
 
 function record(method: string, request: NextRequest, body: string) {
   const headers: Record<string, string> = {};
+  const names: string[] = [];
+
   request.headers.forEach((value, key) => {
-    // Log the allowlist by name, plus anything that looks like a signature or an
-    // event id we did not anticipate — that is the whole point of the probe.
-    if (INTERESTING.includes(key) || /sign|event|delivery|attempt/i.test(key)) {
-      headers[key] = value;
-    }
+    // Every header NAME, because the thing we are hunting for is the name of
+    // whatever carries authentication — we cannot allowlist a header we have
+    // not seen yet.
+    names.push(key);
+    // Values only for headers that cannot carry a credential. Mamo's
+    // `auth_header` is a shared secret it sends back to us verbatim, and a
+    // secret in Cloud Logging is a secret leaked.
+    if (INTERESTING.includes(key)) headers[key] = value;
   });
 
   // One line, so `gcloud logging read` returns it whole.
@@ -63,6 +58,7 @@ function record(method: string, request: NextRequest, body: string) {
       JSON.stringify({
         method,
         url: request.nextUrl.pathname + request.nextUrl.search,
+        headerNames: names.sort(),
         headers,
         bodyLength: body.length,
         body: body.slice(0, 8000),
